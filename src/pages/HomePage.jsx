@@ -12,20 +12,53 @@ const HomePage = () => {
   const loadingState = false;
   const [todos, setTodos] = useState([]);
   const [loadingComplete, setloadingComplete] = useState(loadingState);
+  const initialFormState = { name: "", description: "" };
+  const [formState, setFormState] = useState(initialFormState);
+  const apiEndpoint =
+    "https://j7sphw5bq4.execute-api.us-east-1.amazonaws.com/test/todos";
 
   useEffect(() => {
     fetchTodos();
   }, []);
 
+  function setInput(key, value) {
+    setFormState({ ...formState, [key]: value });
+  }
+
   async function fetchTodos() {
     try {
-      const res = await axios.get(
-        `https://j7sphw5bq4.execute-api.us-east-1.amazonaws.com/test/todos`
-      );
+      const res = await axios.get(apiEndpoint);
       setTodos(res.data.Items);
       setloadingComplete({ loadingComplete: true });
     } catch (err) {
       console.log("error fetching todos");
+    }
+  }
+
+  async function addTodo() {
+    try {
+      if (!formState.name || !formState.description) return;
+      const todo = {
+        description: {
+          S: formState.description
+        },
+        name: {
+          S: formState.name
+        }
+      };
+      setTodos([...todos, todo]);
+      setFormState(initialFormState);
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      const body = JSON.stringify(todo);
+      await axios.post(apiEndpoint, body, config);
+      fetchTodos();
+    } catch (err) {
+      console.log("error creating todo:", err);
     }
   }
 
@@ -40,11 +73,34 @@ const HomePage = () => {
             style={styles.header}
           />
         </div>
+        <div>
+          <Input
+            onChange={event => setInput("name", event.target.value)}
+            value={formState.name}
+            placeholder="Name"
+            style={styles.input}
+          />
+          <Input
+            onChange={event => setInput("description", event.target.value)}
+            value={formState.description}
+            placeholder="Description"
+            style={styles.input}
+          />
+          <Button onClick={addTodo} type="primary" style={styles.submit}>
+            Add
+          </Button>
+        </div>
         {loadingComplete ? (
           <div>
             {todos.map((todo, index) => (
-              <Card key={todo.id.S} title={todo.name.S} style={{ width: 300 }}>
-                <p>{todo.description.S}</p>
+              <Card
+                key={todo.id.S ? todo.id.S : index}
+                title={todo.name.S ? todo.name.S : todo.name}
+                style={{ width: 300 }}
+              >
+                <p>
+                  {todo.description.S ? todo.description.S : todo.description}
+                </p>
               </Card>
             ))}
           </div>
