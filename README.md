@@ -1,6 +1,6 @@
 # AWS Serverless React App
 
-A reference project to deploy a serverless, full-stack React app onto AWS with Terraform. Inspired by (this)[https://www.youtube.com/watch?v=Bro0uFVDrWY] YouTube tutorial by Code Engine
+A reference project to deploy a serverless, full-stack React app onto AWS with Terraform. Inspired by [this](https://www.youtube.com/watch?v=Bro0uFVDrWY) YouTube tutorial by Code Engine
 
 App URL [here](http://matlau-aws-react-serverless.s3-website-us-east-1.amazonaws.com/)
 
