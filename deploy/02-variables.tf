@@ -5,9 +5,9 @@ variable "github_username" {
 }
 
 variable "github_project_name" {
-  default = "react-terraform-aws-codepipeline"
+  default = "react-serverless-aws-terraform"
 }
 
 variable "bucket_name" {
-  default = "matlau-aws-react-codepipeline-bucket"
+  default = "matlau-aws-react-serverless"
 }

@@ -1,5 +1,5 @@
-resource "aws_iam_role" "codepipeline_role" {
-  name = "codepipeline_role"
+resource "aws_iam_role" "react_serverless_codepipeline_role" {
+  name = "react_serverless_codepipeline_role"
 
   assume_role_policy = <<EOF
 {
@@ -20,7 +20,7 @@ EOF
 
 resource "aws_iam_role_policy" "codepipeline_policy" {
   name = "codepipeline_policy"
-  role = aws_iam_role.codepipeline_role.id
+  role = aws_iam_role.react_serverless_codepipeline_role.id
 
   policy = <<EOF
 {
@@ -35,8 +35,8 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
         "s3:PutObject"
       ],
       "Resource": [
-        "${aws_s3_bucket.react-aws-codepipeline-s3-bucket.arn}",
-        "${aws_s3_bucket.react-aws-codepipeline-s3-bucket.arn}/*"
+        "${aws_s3_bucket.react-serverless-s3-bucket.arn}",
+        "${aws_s3_bucket.react-serverless-s3-bucket.arn}/*"
       ]
     },
     {
@@ -52,8 +52,8 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
 EOF
 }
 
-resource "aws_iam_role" "codebuild_role" {
-  name = "codebuild_role"
+resource "aws_iam_role" "react_serverless_codebuild_role" {
+  name = "react_serverless_codebuild_role"
 
   assume_role_policy = <<EOF
 {
@@ -73,7 +73,7 @@ EOF
 
 resource "aws_iam_role_policy" "codebuild_policy" {
   name = "codebuild_policy"
-  role = aws_iam_role.codebuild_role.id
+  role = aws_iam_role.react_serverless_codebuild_role.id
 
   policy = <<EOF
 {

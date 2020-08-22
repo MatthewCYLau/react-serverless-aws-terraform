@@ -2,7 +2,7 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_s3_bucket" "react-aws-codepipeline-s3-bucket" {
+resource "aws_s3_bucket" "react-serverless-s3-bucket" {
   bucket        = var.bucket_name
   acl           = "public-read"
   force_destroy = true
@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "react-aws-codepipeline-s3-bucket" {
 }
 
 resource "aws_s3_bucket_policy" "s3_bucket_policy" {
-  bucket = aws_s3_bucket.react-aws-codepipeline-s3-bucket.id
+  bucket = aws_s3_bucket.react-serverless-s3-bucket.id
   policy = <<POLICY
 {
   "Version": "2012-10-17",
@@ -31,12 +31,12 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy" {
 POLICY
 }
 
-resource "aws_codepipeline" "react-aws-codepipeline" {
-  name     = "react-aws-codepipeline2"
-  role_arn = aws_iam_role.codepipeline_role.arn
+resource "aws_codepipeline" "react-serverless-codepipeline" {
+  name     = "react-serverless-codepipeline"
+  role_arn = aws_iam_role.react_serverless_codepipeline_role.arn
 
   artifact_store {
-    location = aws_s3_bucket.react-aws-codepipeline-s3-bucket.bucket
+    location = aws_s3_bucket.react-serverless-s3-bucket.bucket
     type     = "S3"
 
   }
@@ -74,7 +74,7 @@ resource "aws_codepipeline" "react-aws-codepipeline" {
       version          = "1"
 
       configuration = {
-        ProjectName = "react-aws-codebuild"
+        ProjectName = "react-serverless-codebuild"
       }
     }
   }
@@ -91,18 +91,18 @@ resource "aws_codepipeline" "react-aws-codepipeline" {
       version         = "1"
 
       configuration = {
-        BucketName = aws_s3_bucket.react-aws-codepipeline-s3-bucket.bucket
+        BucketName = aws_s3_bucket.react-serverless-s3-bucket.bucket
         Extract    = "true"
       }
     }
   }
 }
 
-resource "aws_codebuild_project" "react-aws-codebuild" {
-  name          = "react-aws-codebuild"
-  description   = "react-aws-codebuild"
+resource "aws_codebuild_project" "react-serverless-codebuild" {
+  name          = "react-serverless-codebuild"
+  description   = "react-serverless-codebuild"
   build_timeout = "5"
-  service_role  = aws_iam_role.codebuild_role.arn
+  service_role  = aws_iam_role.react_serverless_codebuild_role.arn
 
   artifacts {
     type = "CODEPIPELINE"
