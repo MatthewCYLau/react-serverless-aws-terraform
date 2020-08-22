@@ -94,7 +94,7 @@ const HomePage = () => {
           <div>
             {todos.map((todo, index) => (
               <Card
-                key={todo.id.S ? todo.id.S : index}
+                key={todo.id ? todo.id.S : index}
                 title={todo.name.S ? todo.name.S : todo.name}
                 style={{ width: 300 }}
               >
