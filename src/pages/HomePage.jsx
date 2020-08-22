@@ -15,7 +15,7 @@ const HomePage = () => {
   const initialFormState = { name: "", description: "" };
   const [formState, setFormState] = useState(initialFormState);
   const apiEndpoint =
-    "https://ymvbz0v6f2.execute-api.us-east-1.amazonaws.com/test/todos";
+    "https://nokgyb6iuj.execute-api.us-east-1.amazonaws.com/test/todos";
 
   useEffect(() => {
     fetchTodos();
