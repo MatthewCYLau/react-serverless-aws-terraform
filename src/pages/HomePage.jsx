@@ -38,14 +38,7 @@ const HomePage = () => {
   async function addTodo() {
     try {
       if (!formState.name || !formState.description) return;
-      const todo = {
-        description: {
-          S: formState.description
-        },
-        name: {
-          S: formState.name
-        }
-      };
+      const todo = { ...formState };
       setTodos([...todos, todo]);
       setFormState(initialFormState);
 
