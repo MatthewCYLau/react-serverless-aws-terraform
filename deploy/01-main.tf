@@ -116,12 +116,12 @@ resource "aws_codebuild_project" "react-serverless-codebuild" {
     image                       = "aws/codebuild/standard:4.0"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
-  }
 
-  environment_variable {
+    environment_variable {
       name  = "REACT_APP_API_ENDPOINT"
       value = aws_api_gateway_deployment.api_gateway_deployment.invoke_url
     }
+  }
 
   source {
     type = "CODEPIPELINE"
