@@ -103,9 +103,9 @@ resource "aws_codebuild_project" "react-serverless-codebuild" {
   description   = "react-serverless-codebuild"
   build_timeout = "5"
   service_role  = aws_iam_role.react_serverless_codebuild_role.arn
-  depends_on = [
-    aws_api_gateway_deployment.api_gateway_deployment
-  ]
+  # depends_on = [
+  #   aws_api_gateway_deployment.api_gateway_deployment
+  # ]
 
   artifacts {
     type = "CODEPIPELINE"
