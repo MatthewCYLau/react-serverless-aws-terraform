@@ -11,3 +11,7 @@ variable "github_project_name" {
 variable "bucket_name" {
   default = "matlau-aws-react-serverless"
 }
+
+variable "table_name" {
+  default = "todos"
+}

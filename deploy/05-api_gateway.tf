@@ -22,5 +22,5 @@ resource "aws_api_gateway_deployment" "api_gateway_deployment" {
     aws_api_gateway_rest_api.react-serverless
   ]
   rest_api_id = aws_api_gateway_rest_api.react-serverless.id
-  stage_name  = "test"
+  stage_name  = "dev"
 }

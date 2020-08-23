@@ -2,6 +2,8 @@
 
 A reference project to deploy a serverless, full-stack React app onto AWS with Terraform. Inspired by [this](https://www.youtube.com/watch?v=Bro0uFVDrWY) YouTube tutorial by Code Engine
 
+A to-do list app which allows users to create, and read to-do's from DynamoDB
+
 App URL [here](http://matlau-aws-react-serverless.s3-website-us-east-1.amazonaws.com/)
 
 ## Pre-requisite

@@ -80,7 +80,7 @@ resource "aws_iam_role_policy" "lambda_policy" {
                 "dynamodb:Update*",
                 "dynamodb:PutItem"
             ],
-            "Resource": "arn:aws:dynamodb:*:*:table/todos"
+            "Resource": "arn:aws:dynamodb:*:*:table/${var.table_name}"
         }
     ]
 }
