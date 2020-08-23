@@ -26,7 +26,7 @@ const HomePage = () => {
 
   async function fetchTodos() {
     try {
-      const res = await axios.get(apiEndpoint);
+      const res = await axios.get(`${apiEndpoint}/todos`);
       setTodos(res.data.Items);
       setloadingComplete({ loadingComplete: true });
     } catch (err) {
@@ -47,7 +47,7 @@ const HomePage = () => {
         }
       };
       const body = JSON.stringify(todo);
-      await axios.post(apiEndpoint, body, config);
+      await axios.post(`${apiEndpoint}/todos`, body, config);
       fetchTodos();
     } catch (err) {
       console.log("error creating todo:", err);
