@@ -48,6 +48,8 @@ terraform apply # deploys AWS stack
 terraform destroy # destroys AWS stack
 ```
 
+To add a new Lambda function i.e. `updateTodo.js`, navigate to `deploy/lambdas` and run `zip updateTodo.zip updateTodo.js` to generate the zip file for the Lambda function
+
 When prompted for `github_token`, provide the value and hit Return
 
 ## Contributing
