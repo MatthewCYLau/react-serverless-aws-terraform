@@ -93,6 +93,13 @@ const HomePage = () => {
                 <p>
                   {todo.description.S ? todo.description.S : todo.description}
                 </p>
+                <Button>
+                  {todo.id && (
+                    <Link className="button" to={`/edit/${todo.id.S}`}>
+                      More
+                    </Link>
+                  )}
+                </Button>
               </Card>
             ))}
           </div>
