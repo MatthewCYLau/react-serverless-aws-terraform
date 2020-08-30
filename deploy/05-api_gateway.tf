@@ -12,8 +12,10 @@ output "base_url" {
 data "template_file" "api_definition" {
   template = file("api/openapi.yaml")
   vars = {
-    lambda_uri_get_todos   = aws_lambda_function.get_todos.invoke_arn
-    lambda_uri_create_todo = aws_lambda_function.create_todo.invoke_arn
+    lambda_uri_get_todos      = aws_lambda_function.get_todos.invoke_arn
+    lambda_uri_create_todo    = aws_lambda_function.create_todo.invoke_arn
+    lambda_uri_get_todo_by_id = aws_lambda_function.get_todo_by_id.invoke_arn
+
   }
 }
 

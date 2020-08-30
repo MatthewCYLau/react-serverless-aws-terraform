@@ -14,6 +14,14 @@ resource "aws_lambda_function" "get_todos" {
   role          = aws_iam_role.lambda_exec.arn
 }
 
+resource "aws_lambda_function" "get_todo_by_id" {
+  function_name = "GetTodoById"
+  filename      = "lambdas/getTodoById.zip"
+  handler       = "getTodoById.handler"
+  runtime       = "nodejs10.x"
+  role          = aws_iam_role.lambda_exec.arn
+}
+
 resource "aws_lambda_function" "create_todo" {
   function_name = "CreateTodo"
   filename      = "lambdas/createTodo.zip"
