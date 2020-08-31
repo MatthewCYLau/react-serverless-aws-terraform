@@ -6,6 +6,8 @@ A to-do list app which allows users to create, and read to-do's from DynamoDB
 
 App URL [here](http://matlau-aws-react-serverless.s3-website-us-east-1.amazonaws.com/)
 
+![AWS Architecture](images/aws_react_serverless.jpg)
+
 ## Pre-requisite
 
 Make sure you have installed [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli), [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html#cliv2-mac-prereq), and configured a `default` AWS CLI profile (see doc [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-profiles))
