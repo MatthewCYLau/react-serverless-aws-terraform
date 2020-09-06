@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PageHeader, Spin, Card, Input, Button } from "antd";
 import axios from "axios";
 
-const CommentsList = ({ todoID }) => {
+const CommentsList = ({ todoId }) => {
   const initialFormState = { content: "" };
   const [formState, setFormState] = useState(initialFormState);
   const [comments, setComments] = useState([]);
@@ -38,7 +38,10 @@ const CommentsList = ({ todoID }) => {
   async function addComment() {
     try {
       if (!formState.content) return;
-      const comment = { ...formState, todoID };
+      const comment = {
+        ...formState,
+        todoId
+      };
       setFormState(initialFormState);
 
       const config = {
