@@ -54,6 +54,15 @@ const HomePage = () => {
     }
   }
 
+  async function removeTodo(id) {
+    try {
+      setTodos(todos.filter(todo => todo.id.S !== id));
+      await axios.delete(`${apiEndpoint}/todos/${id}`);
+    } catch (err) {
+      console.log("error removing todo:", err);
+    }
+  }
+
   return (
     <div>
       <Content style={{ padding: "0 50px" }}>
@@ -93,6 +102,11 @@ const HomePage = () => {
                 <p>
                   {todo.description.S ? todo.description.S : todo.description}
                 </p>
+                {todo.id && (
+                  <Button type="primary" onClick={() => removeTodo(todo.id.S)}>
+                    Done
+                  </Button>
+                )}
                 <Button>
                   {todo.id && (
                     <Link className="button" to={`/edit/${todo.id.S}`}>
