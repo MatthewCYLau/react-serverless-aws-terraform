@@ -12,6 +12,10 @@ variable "bucket_name" {
   default = "matlau-aws-react-serverless"
 }
 
-variable "table_name" {
+variable "todos_table_name" {
   default = "todos"
+}
+
+variable "comments_table_name" {
+  default = "comments"
 }

@@ -38,6 +38,14 @@ resource "aws_lambda_function" "create_todo" {
   role          = aws_iam_role.lambda_exec.arn
 }
 
+resource "aws_lambda_function" "create_comment" {
+  function_name = "CreateComment"
+  filename      = "lambdas/createComment.zip"
+  handler       = "createComment.handler"
+  runtime       = "nodejs10.x"
+  role          = aws_iam_role.lambda_exec.arn
+}
+
 # IAM role which dictates what other AWS services the Lambda function
 # may access.
 resource "aws_iam_role" "lambda_exec" {
@@ -96,7 +104,10 @@ resource "aws_iam_role_policy" "lambda_policy" {
                 "dynamodb:Update*",
                 "dynamodb:PutItem"
             ],
-            "Resource": "arn:aws:dynamodb:*:*:table/${var.table_name}"
+            "Resource": [
+              "arn:aws:dynamodb:*:*:table/${var.todos_table_name}",
+              "arn:aws:dynamodb:*:*:table/${var.comments_table_name}"
+            ]
         }
     ]
 }

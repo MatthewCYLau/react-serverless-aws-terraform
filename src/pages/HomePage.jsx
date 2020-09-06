@@ -56,7 +56,7 @@ const HomePage = () => {
 
   async function removeTodo(id) {
     try {
-      setTodos(todos.filter(todo => todo.id.S !== id));
+      setTodos(todos.filter(todo => todo.todoId.S !== id));
       await axios.delete(`${apiEndpoint}/todos/${id}`);
     } catch (err) {
       console.log("error removing todo:", err);
@@ -95,21 +95,24 @@ const HomePage = () => {
           <div>
             {todos.map((todo, index) => (
               <Card
-                key={todo.id ? todo.id.S : index}
+                key={todo.todoId ? todo.todoId.S : index}
                 title={todo.name.S ? todo.name.S : todo.name}
                 style={{ width: 300 }}
               >
                 <p>
                   {todo.description.S ? todo.description.S : todo.description}
                 </p>
-                {todo.id && (
-                  <Button type="primary" onClick={() => removeTodo(todo.id.S)}>
+                {todo.todoId && (
+                  <Button
+                    type="primary"
+                    onClick={() => removeTodo(todo.todoId.S)}
+                  >
                     Done
                   </Button>
                 )}
                 <Button>
-                  {todo.id && (
-                    <Link className="button" to={`/edit/${todo.id.S}`}>
+                  {todo.todoId && (
+                    <Link className="button" to={`/edit/${todo.todoId.S}`}>
                       More
                     </Link>
                   )}

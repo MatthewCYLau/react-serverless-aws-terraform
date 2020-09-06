@@ -16,6 +16,7 @@ data "template_file" "api_definition" {
     lambda_uri_create_todo       = aws_lambda_function.create_todo.invoke_arn
     lambda_uri_get_todo_by_id    = aws_lambda_function.get_todo_by_id.invoke_arn
     lambda_uri_delete_todo_by_id = aws_lambda_function.delete_todo_by_id.invoke_arn
+    lambda_uri_create_comment    = aws_lambda_function.create_comment.invoke_arn
   }
 }
 
