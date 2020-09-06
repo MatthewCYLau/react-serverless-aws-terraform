@@ -11,7 +11,7 @@ exports.handler = function(event, context, callback) {
   var params = {
     TableName: "todos",
     Item: {
-      id: { S: context.awsRequestId },
+      todoId: { S: context.awsRequestId },
       name: { S: event.name },
       description: { S: event.description }
     }

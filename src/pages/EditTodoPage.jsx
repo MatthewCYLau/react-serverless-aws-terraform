@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Layout, Card, Button, Spin, Input, PageHeader } from "antd";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import CommentsList from "../components/CommentsList";
 
 const { Content } = Layout;
 
@@ -21,12 +22,12 @@ const EditTodoPage = ({ location, history }) => {
   // current username state
   // const [currentUsername, setCurrentUsername] = useState("");
 
-  const id = location.pathname.split("/")[2];
+  const todoId = location.pathname.split("/")[2];
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
 
   async function fetchTodo() {
     try {
-      const res = await axios.get(`${apiEndpoint}/todos/${id}`);
+      const res = await axios.get(`${apiEndpoint}/todos/${todoId}`);
       const todo = res.data.Item;
       const name = todo.name.S;
       const description = todo.description.S;
@@ -40,7 +41,7 @@ const EditTodoPage = ({ location, history }) => {
   //   async function editTodo() {
   //     try {
   //       if (!formState.name || !formState.description) return;
-  //       const updates = { ...formState, id };
+  //       const updates = { ...formState, todoId };
   //       await API.graphql(graphqlOperation(updateTodo, { input: updates }));
   //       history.push("/");
   //     } catch (err) {
@@ -52,7 +53,7 @@ const EditTodoPage = ({ location, history }) => {
     setFormState({ ...formState, [key]: value });
   }
 
-  // When component mounts, fetchTodo by ID
+  // When component mounts, fetchTodo by todoId
   useEffect(() => {
     fetchTodo();
   }, []);
@@ -96,7 +97,7 @@ const EditTodoPage = ({ location, history }) => {
               </Button>
             </div> */}
 
-            <Card title={todo.name} style={{ width: 300 }}>
+            <Card title={todo.name} style={{ wtodoIdth: 300 }}>
               <p>{todo.description}</p>
               <Button>
                 <Link className="button" to="/">
@@ -104,6 +105,7 @@ const EditTodoPage = ({ location, history }) => {
                 </Link>
               </Button>
             </Card>
+            <CommentsList todoId={todoId} />
           </div>
         ) : (
           <Spin />
