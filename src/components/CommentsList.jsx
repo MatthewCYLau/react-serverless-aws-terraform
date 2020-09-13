@@ -48,19 +48,14 @@ const CommentsList = ({ todoId }) => {
     }
   }
 
-  //   async function removeComment(id) {
-  //     try {
-  //       const commentDetails = {
-  //         id
-  //       };
-  //       setComments(comments.filter(comment => comment.id !== id));
-  //       await API.graphql(
-  //         graphqlOperation(deleteComment, { input: commentDetails })
-  //       );
-  //     } catch (err) {
-  //       console.log("error removing todo:", err);
-  //     }
-  //   }
+  async function removeComment(id) {
+    try {
+      setComments(comments.filter(comment => comment.commentId !== id));
+      await axios.delete(`${apiEndpoint}/comments/${id}`);
+    } catch (err) {
+      console.log("error removing comment:", err);
+    }
+  }
 
   return (
     <div>
@@ -84,11 +79,14 @@ const CommentsList = ({ todoId }) => {
         <div>
           {comments.map((comment, index) => (
             <Card
-              key={comment.id ? comment.id.S : index}
+              key={comment.commentId ? comment.commentId.S : index}
               title={comment.content.S}
               style={{ width: 300 }}
             >
-              <Button type="primary" onClick={() => console.log("delete")}>
+              <Button
+                type="primary"
+                onClick={() => removeComment(comment.commentId.S)}
+              >
                 Delete
               </Button>
             </Card>

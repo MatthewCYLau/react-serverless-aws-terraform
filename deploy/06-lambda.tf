@@ -54,6 +54,14 @@ resource "aws_lambda_function" "get_comments" {
   role          = aws_iam_role.lambda_exec.arn
 }
 
+resource "aws_lambda_function" "delete_comment_by_id" {
+  function_name = "DeleteCommentById"
+  filename      = "lambdas/deleteCommentById.zip"
+  handler       = "deleteCommentById.handler"
+  runtime       = "nodejs10.x"
+  role          = aws_iam_role.lambda_exec.arn
+}
+
 # IAM role which dictates what other AWS services the Lambda function
 # may access.
 resource "aws_iam_role" "lambda_exec" {

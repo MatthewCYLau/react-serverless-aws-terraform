@@ -48,3 +48,11 @@ resource "aws_lambda_permission" "lambda_permission_get_comments" {
   # More: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html
   source_arn = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/GET/comments"
 }
+
+resource "aws_lambda_permission" "lambda_permission_delete_comment_by_id" {
+  statement_id  = "AllowExecutionFromAPIGatewayUCI"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.delete_comment_by_id.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/DELETE/comments/*"
+}
