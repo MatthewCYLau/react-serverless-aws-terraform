@@ -46,6 +46,14 @@ resource "aws_lambda_function" "create_comment" {
   role          = aws_iam_role.lambda_exec.arn
 }
 
+resource "aws_lambda_function" "get_comments" {
+  function_name = "GetComments"
+  filename      = "lambdas/getComments.zip"
+  handler       = "getComments.handler"
+  runtime       = "nodejs10.x"
+  role          = aws_iam_role.lambda_exec.arn
+}
+
 # IAM role which dictates what other AWS services the Lambda function
 # may access.
 resource "aws_iam_role" "lambda_exec" {
