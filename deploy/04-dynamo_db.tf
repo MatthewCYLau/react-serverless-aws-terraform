@@ -22,4 +22,15 @@ resource "aws_dynamodb_table" "dynamodb-table-comments" {
     name = "commentId"
     type = "S"
   }
+
+  attribute {
+    name = "todoId"
+    type = "S"
+  }
+
+  global_secondary_index {
+    name            = "todoIdIndex"
+    hash_key        = "todoId"
+    projection_type = "ALL"
+  }
 }

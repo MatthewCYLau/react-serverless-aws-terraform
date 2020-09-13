@@ -9,6 +9,7 @@ resource "aws_s3_bucket" "react-serverless-s3-bucket" {
 
   website {
     index_document = "index.html"
+    error_document = "index.html"
   }
 }
 
