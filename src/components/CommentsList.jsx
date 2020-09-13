@@ -8,32 +8,23 @@ const CommentsList = ({ todoId }) => {
   const [comments, setComments] = useState([]);
   const [loadingComplete, setloadingComplete] = useState(true);
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
-  //   useEffect(() => {
-  //     fetchComments();
-  //   }, []);
+  useEffect(() => {
+    fetchComments();
+  }, []);
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value });
   }
 
-  //   async function fetchComments() {
-  //     try {
-  //       const filter = {
-  //         todoID: {
-  //           eq: todoID
-  //         }
-  //       };
-  //       const commentsDetails = await API.graphql(
-  //         graphqlOperation(listComments, { filter })
-  //       );
-  //       const comments = commentsDetails.data.listComments.items;
-
-  //       setComments(comments);
-  //       setloadingComplete({ loadingComplete: true });
-  //     } catch (err) {
-  //       console.log("error fetching comments");
-  //     }
-  //   }
+  async function fetchComments() {
+    try {
+      const res = await axios.get(`${apiEndpoint}/comments?todoId=${todoId}`);
+      setComments(res.data.Items);
+      setloadingComplete({ loadingComplete: true });
+    } catch (err) {
+      console.log("error fetching comments");
+    }
+  }
 
   async function addComment() {
     try {
@@ -51,7 +42,7 @@ const CommentsList = ({ todoId }) => {
       };
       const body = JSON.stringify(comment);
       await axios.post(`${apiEndpoint}/comments`, body, config);
-      // fetchComments();
+      fetchComments();
     } catch (err) {
       console.log("error creating comment:", err);
     }
@@ -91,25 +82,17 @@ const CommentsList = ({ todoId }) => {
       </div>
       {loadingComplete ? (
         <div>
-          Comments coming soon
-          {/* {comments.map((comment, index) => (
+          {comments.map((comment, index) => (
             <Card
-              key={comment.id ? comment.id : index}
-              title={comment.content}
+              key={comment.id ? comment.id.S : index}
+              title={comment.content.S}
               style={{ width: 300 }}
             >
-              <p>{comment.owner}</p>
-              {currentUsername === comment.owner && (
-                <Button
-                  type="primary"
-                  onClick={() => removeComment(comment.id)}
-                >
-                  Delete
-                </Button>
-              )}
-              <Likes commentID={comment.id} currentUsername={currentUsername} />
+              <Button type="primary" onClick={() => console.log("delete")}>
+                Delete
+              </Button>
             </Card>
-          ))} */}
+          ))}
         </div>
       ) : (
         <Spin />
