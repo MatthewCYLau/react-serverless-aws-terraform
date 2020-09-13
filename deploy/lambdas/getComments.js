@@ -31,7 +31,7 @@ exports.handler = (event, context, callback) => {
         responseCode = 500;
         responseBody = err;
       } else {
-        if (data.Items && data.Items.length > 0) {
+        if (data.Items) {
           responseBody = data;
         } else {
           responseCode = 404;
