@@ -50,7 +50,7 @@ const CommentsList = ({ todoId }) => {
 
   async function removeComment(id) {
     try {
-      setComments(comments.filter(comment => comment.commentId !== id));
+      setComments(comments.filter(comment => comment.commentId.S !== id));
       await axios.delete(`${apiEndpoint}/comments/${id}`);
     } catch (err) {
       console.log("error removing comment:", err);
