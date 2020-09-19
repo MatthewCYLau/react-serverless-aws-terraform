@@ -17,8 +17,7 @@ const EditTodoPage = ({ location, history }) => {
   const [todo, setTodo] = useState(initialTodoState);
 
   // loading state
-  const initialLoadingState = false;
-  const [loadingState, setloadingState] = useState(initialLoadingState);
+  const [loadingComplete, setLoadingComplete] = useState(false);
 
   // current username state
   // const [currentUsername, setCurrentUsername] = useState("");
@@ -33,22 +32,27 @@ const EditTodoPage = ({ location, history }) => {
       const name = todo.name.S;
       const description = todo.description.S;
       setTodo({ name, description });
-      setloadingState({ loadingState: true });
+      setLoadingComplete({ loadingComplete: true });
     } catch (err) {
       console.log("error fetching todo");
     }
   }
 
-  //   async function editTodo() {
-  //     try {
-  //       if (!formState.name || !formState.description) return;
-  //       const updates = { ...formState, todoId };
-  //       await API.graphql(graphqlOperation(updateTodo, { input: updates }));
-  //       history.push("/");
-  //     } catch (err) {
-  //       console.log("error updating todo:", err);
-  //     }
-  //   }
+  async function editTodo() {
+    try {
+      if (!formState.name || !formState.description) return;
+      const config = {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      const body = JSON.stringify(formState);
+      await axios.patch(`${apiEndpoint}/todos/${todoId}`, body, config);
+      history.push("/");
+    } catch (err) {
+      console.log("error updating todo:", err);
+    }
+  }
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value });
@@ -60,13 +64,13 @@ const EditTodoPage = ({ location, history }) => {
   }, []);
 
   // When todo updates, set form state
-  //   useEffect(() => {
-  //     if (todo.name) {
-  //       const name = todo.name;
-  //       const description = todo.description;
-  //       setFormState({ name, description });
-  //     }
-  //   }, [todo]);
+  useEffect(() => {
+    if (todo.name) {
+      const name = todo.name;
+      const description = todo.description;
+      setFormState({ name, description });
+    }
+  }, [todo]);
 
   return (
     <div>
@@ -78,9 +82,9 @@ const EditTodoPage = ({ location, history }) => {
             style={styles.header}
           />
         </div>
-        {loadingState ? (
+        {loadingComplete ? (
           <div>
-            {/* <div>
+            <div>
               <Input
                 onChange={event => setInput("name", event.target.value)}
                 value={formState.name}
@@ -96,7 +100,7 @@ const EditTodoPage = ({ location, history }) => {
               <Button onClick={editTodo} type="primary" style={styles.submit}>
                 Save
               </Button>
-            </div> */}
+            </div>
 
             <Card title={todo.name} style={{ wtodoIdth: 300 }}>
               <p>{todo.description}</p>

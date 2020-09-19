@@ -10,9 +10,8 @@ import axios from "axios";
 const { Content } = Layout;
 
 const HomePage = () => {
-  const loadingState = false;
   const [todos, setTodos] = useState([]);
-  const [loadingComplete, setloadingComplete] = useState(loadingState);
+  const [loadingComplete, setLoadingComplete] = useState(false);
   const initialFormState = { name: "", description: "" };
   const [formState, setFormState] = useState(initialFormState);
   const apiEndpoint = config.apiEndpoint;
@@ -29,7 +28,7 @@ const HomePage = () => {
     try {
       const res = await axios.get(`${apiEndpoint}/todos`);
       setTodos(res.data.Items);
-      setloadingComplete({ loadingComplete: true });
+      setLoadingComplete({ loadingComplete: true });
     } catch (err) {
       console.log("error fetching todos");
     }
