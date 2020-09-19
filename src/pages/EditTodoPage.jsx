@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Card, Button, Spin, Input, PageHeader } from "antd";
 import { Link } from "react-router-dom";
+import config from "../conf/config";
 import axios from "axios";
 import CommentsList from "../components/CommentsList";
 
@@ -23,7 +24,7 @@ const EditTodoPage = ({ location, history }) => {
   // const [currentUsername, setCurrentUsername] = useState("");
 
   const todoId = location.pathname.split("/")[2];
-  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
+  const apiEndpoint = config.apiEndpoint;
 
   async function fetchTodo() {
     try {

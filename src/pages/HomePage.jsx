@@ -4,6 +4,7 @@ import { PageHeader } from "antd";
 import { Card, Button, Input } from "antd";
 import "antd/dist/antd.css";
 import { Layout, Spin } from "antd";
+import config from "../conf/config";
 import axios from "axios";
 
 const { Content } = Layout;
@@ -14,7 +15,7 @@ const HomePage = () => {
   const [loadingComplete, setloadingComplete] = useState(loadingState);
   const initialFormState = { name: "", description: "" };
   const [formState, setFormState] = useState(initialFormState);
-  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
+  const apiEndpoint = config.apiEndpoint;
 
   useEffect(() => {
     fetchTodos();
