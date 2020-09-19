@@ -19,10 +19,10 @@ exports.handler = (event, context, callback) => {
     },
     ExpressionAttributeValues: {
       ":n": {
-        S: event.name
+        S: JSON.parse(event.body).name
       },
       ":d": {
-        S: event.description
+        S: JSON.parse(event.body).description
       }
     },
     Key: {

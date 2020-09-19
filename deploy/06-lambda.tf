@@ -22,6 +22,14 @@ resource "aws_lambda_function" "get_todo_by_id" {
   role          = aws_iam_role.lambda_exec.arn
 }
 
+resource "aws_lambda_function" "update_todo_by_id" {
+  function_name = "UpdateTodoById"
+  filename      = "lambdas/updateTodoById.zip"
+  handler       = "updateTodoById.handler"
+  runtime       = "nodejs10.x"
+  role          = aws_iam_role.lambda_exec.arn
+}
+
 resource "aws_lambda_function" "delete_todo_by_id" {
   function_name = "DeleteTodoById"
   filename      = "lambdas/deleteTodoById.zip"

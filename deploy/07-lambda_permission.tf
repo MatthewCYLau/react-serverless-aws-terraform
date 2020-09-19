@@ -22,6 +22,14 @@ resource "aws_lambda_permission" "lambda_permission_delete_todo_by_id" {
   source_arn    = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/DELETE/todos/*"
 }
 
+resource "aws_lambda_permission" "lambda_permission_update_todo_by_id" {
+  statement_id  = "AllowExecutionFromAPIGatewayUCI"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.update_todo_by_id.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/PATCH/todos/*"
+}
+
 resource "aws_lambda_permission" "lambda_permission_create_todo" {
   statement_id  = "AllowExecutionFromAPIGatewayUCI"
   action        = "lambda:InvokeFunction"
