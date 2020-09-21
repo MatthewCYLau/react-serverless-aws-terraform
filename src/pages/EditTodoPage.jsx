@@ -39,11 +39,7 @@ const EditTodoPage = ({ location, history }) => {
   async function editTodo() {
     try {
       if (!formState.name || !formState.description) return;
-      const config = {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      };
+
       // const body = JSON.stringify(formState);
       // await axios.patch(`${apiEndpoint}/todos/${todoId}`, body, config);
       const config = {
