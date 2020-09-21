@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Card, Button, Spin, Input, PageHeader } from "antd";
 import { Link } from "react-router-dom";
-import config from "../conf/config";
-import axios from "axios";
+import { API } from "aws-amplify";
 import CommentsList from "../components/CommentsList";
 
 const { Content } = Layout;
@@ -23,12 +22,11 @@ const EditTodoPage = ({ location, history }) => {
   // const [currentUsername, setCurrentUsername] = useState("");
 
   const todoId = location.pathname.split("/")[2];
-  const apiEndpoint = config.apiEndpoint;
 
   async function fetchTodo() {
     try {
-      const res = await axios.get(`${apiEndpoint}/todos/${todoId}`);
-      const todo = res.data.Item;
+      const res = await API.get("todos", `/todos/${todoId}`);
+      const todo = res.Item;
       const name = todo.name.S;
       const description = todo.description.S;
       setTodo({ name, description });
@@ -46,8 +44,15 @@ const EditTodoPage = ({ location, history }) => {
           "Content-Type": "application/json"
         }
       };
-      const body = JSON.stringify(formState);
-      await axios.patch(`${apiEndpoint}/todos/${todoId}`, body, config);
+      // const body = JSON.stringify(formState);
+      // await axios.patch(`${apiEndpoint}/todos/${todoId}`, body, config);
+      const config = {
+        body: formState,
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+      await API.put("todos", `/todos/${todoId}`, config);
       history.push("/");
     } catch (err) {
       console.log("error updating todo:", err);

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { PageHeader, Spin, Card, Input, Button } from "antd";
-import axios from "axios";
+import { API } from "aws-amplify";
 
 const CommentsList = ({ todoId }) => {
   const initialFormState = { content: "" };
   const [formState, setFormState] = useState(initialFormState);
   const [comments, setComments] = useState([]);
   const [loadingComplete, setloadingComplete] = useState(true);
-  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
   useEffect(() => {
     fetchComments();
   }, []);
@@ -18,8 +17,9 @@ const CommentsList = ({ todoId }) => {
 
   async function fetchComments() {
     try {
-      const res = await axios.get(`${apiEndpoint}/comments?todoId=${todoId}`);
-      setComments(res.data.Items);
+      //const res = await axios.get(`${apiEndpoint}/comments?todoId=${todoId}`);
+      const res = await API.get("todos", `/comments?todoId=${todoId}`);
+      setComments(res.Items);
       setloadingComplete({ loadingComplete: true });
     } catch (err) {
       console.log("error fetching comments");
@@ -35,13 +35,20 @@ const CommentsList = ({ todoId }) => {
       };
       setFormState(initialFormState);
 
+      // const config = {
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   }
+      // };
+      // const body = JSON.stringify(comment);
+      // await axios.post(`${apiEndpoint}/comments`, body, config);
       const config = {
+        body: comment,
         headers: {
           "Content-Type": "application/json"
         }
       };
-      const body = JSON.stringify(comment);
-      await axios.post(`${apiEndpoint}/comments`, body, config);
+      await API.post("todos", "/comments", config);
       fetchComments();
     } catch (err) {
       console.log("error creating comment:", err);
@@ -51,7 +58,8 @@ const CommentsList = ({ todoId }) => {
   async function removeComment(id) {
     try {
       setComments(comments.filter(comment => comment.commentId.S !== id));
-      await axios.delete(`${apiEndpoint}/comments/${id}`);
+      // await axios.delete(`${apiEndpoint}/comments/${id}`);
+      await API.del("todos", `/comments/${id}`);
     } catch (err) {
       console.log("error removing comment:", err);
     }

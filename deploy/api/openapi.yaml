@@ -22,6 +22,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
+      security:
+        - sigv4: []
       x-amazon-apigateway-integration:
         uri: "${lambda_uri_get_todo_by_id}"
         responses:
@@ -33,7 +35,7 @@ paths:
         httpMethod: "POST"
         contentHandling: "CONVERT_TO_TEXT"
         type: "aws_proxy"
-    patch:
+    put:
       parameters:
         - name: "todoID"
           in: "path"
@@ -51,6 +53,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
+      security:
+        - sigv4: []
       x-amazon-apigateway-integration:
         uri: "${lambda_uri_update_todo_by_id}"
         responses:
@@ -80,6 +84,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
+      security:
+        - sigv4: []
       x-amazon-apigateway-integration:
         type: "aws_proxy"
         uri: "${lambda_uri_delete_todo_by_id}"
@@ -114,7 +120,7 @@ paths:
           default:
             statusCode: "200"
             responseParameters:
-              method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,PATCH,OPTIONS'"
+              method.response.header.Access-Control-Allow-Methods: "'DELETE,GET,PUT,OPTIONS'"
               method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
               method.response.header.Access-Control-Allow-Origin: "'*'"
         requestTemplates:
@@ -140,6 +146,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
+      security:
+        - sigv4: []
       x-amazon-apigateway-integration:
         type: "aws_proxy"
         uri: "${lambda_uri_delete_comment_by_id}"
@@ -194,6 +202,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
+      security:
+        - sigv4: []
       x-amazon-apigateway-integration:
         uri: "${lambda_uri_get_comments}"
         responses:
@@ -217,6 +227,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
+      security:
+        - sigv4: []
       x-amazon-apigateway-integration:
         uri: "${lambda_uri_create_comment}"
         responses:
@@ -271,6 +283,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
+      security:
+        - sigv4: []
       x-amazon-apigateway-integration:
         uri: "${lambda_uri_get_todos}"
         responses:
@@ -294,6 +308,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
+      security:
+        - sigv4: []
       x-amazon-apigateway-integration:
         uri: "${lambda_uri_create_todo}"
         responses:
@@ -340,3 +356,9 @@ components:
     Empty:
       title: "Empty Schema"
       type: "object"
+  securitySchemes:
+    sigv4:
+      type: "apiKey"
+      name: "Authorization"
+      in: "header"
+      x-amazon-apigateway-authtype: "awsSigv4"

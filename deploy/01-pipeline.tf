@@ -122,6 +122,21 @@ resource "aws_codebuild_project" "react-serverless-codebuild" {
       name  = "REACT_APP_API_ENDPOINT"
       value = aws_api_gateway_deployment.api_gateway_deployment.invoke_url
     }
+
+    environment_variable {
+      name  = "USER_POOL_ID"
+      value = aws_cognito_user_pool.app_user_pool.id
+    }
+
+    environment_variable {
+      name  = "APP_CLIENT_ID"
+      value = aws_cognito_user_pool_client.app_user_pool_client.id
+    }
+
+    environment_variable {
+      name  = "IDENTITY_POOL_ID"
+      value = aws_cognito_identity_pool.app_identity_pool.id
+    }
   }
 
   source {

@@ -27,7 +27,7 @@ resource "aws_lambda_permission" "lambda_permission_update_todo_by_id" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.update_todo_by_id.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/PATCH/todos/*"
+  source_arn    = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/PUT/todos/*"
 }
 
 resource "aws_lambda_permission" "lambda_permission_create_todo" {

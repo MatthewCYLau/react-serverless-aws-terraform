@@ -4,8 +4,7 @@ import { PageHeader } from "antd";
 import { Card, Button, Input } from "antd";
 import "antd/dist/antd.css";
 import { Layout, Spin } from "antd";
-import config from "../conf/config";
-import axios from "axios";
+import { API } from "aws-amplify";
 
 const { Content } = Layout;
 
@@ -14,7 +13,6 @@ const HomePage = () => {
   const [loadingComplete, setLoadingComplete] = useState(false);
   const initialFormState = { name: "", description: "" };
   const [formState, setFormState] = useState(initialFormState);
-  const apiEndpoint = config.apiEndpoint;
 
   useEffect(() => {
     fetchTodos();
@@ -26,10 +24,11 @@ const HomePage = () => {
 
   async function fetchTodos() {
     try {
-      const res = await axios.get(`${apiEndpoint}/todos`);
-      setTodos(res.data.Items);
+      const res = await API.get("todos", "/todos");
+      setTodos(res.Items);
       setLoadingComplete({ loadingComplete: true });
     } catch (err) {
+      console.log(err);
       console.log("error fetching todos");
     }
   }
@@ -42,12 +41,12 @@ const HomePage = () => {
       setFormState(initialFormState);
 
       const config = {
+        body: todo,
         headers: {
           "Content-Type": "application/json"
         }
       };
-      const body = JSON.stringify(todo);
-      await axios.post(`${apiEndpoint}/todos`, body, config);
+      await API.post("todos", "/todos", config);
       fetchTodos();
     } catch (err) {
       console.log("error creating todo:", err);
@@ -57,7 +56,7 @@ const HomePage = () => {
   async function removeTodo(id) {
     try {
       setTodos(todos.filter(todo => todo.todoId.S !== id));
-      await axios.delete(`${apiEndpoint}/todos/${id}`);
+      await API.del("todos", `/todos/${id}`);
     } catch (err) {
       console.log("error removing todo:", err);
     }
