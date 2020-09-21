@@ -8,6 +8,9 @@ import Footer from "../src/components/Footer";
 // AntUI
 import { Layout } from "antd";
 
+//Amplify Auth
+import { withAuthenticator } from "@aws-amplify/ui-react";
+
 const App = () => (
   <Router>
     <Fragment>
@@ -28,4 +31,4 @@ const styles = {
     minHeight: "100vh"
   }
 };
-export default App;
+export default withAuthenticator(App);
