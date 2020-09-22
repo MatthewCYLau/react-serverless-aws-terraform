@@ -127,17 +127,17 @@ resource "aws_codebuild_project" "react-serverless-codebuild" {
     }
 
     environment_variable {
-      name  = "USER_POOL_ID"
+      name  = "REACT_APP_USER_POOL_ID"
       value = aws_cognito_user_pool.app_user_pool.id
     }
 
     environment_variable {
-      name  = "APP_CLIENT_ID"
+      name  = "REACT_APP_APP_CLIENT_ID"
       value = aws_cognito_user_pool_client.app_user_pool_client.id
     }
 
     environment_variable {
-      name  = "IDENTITY_POOL_ID"
+      name  = "REACT_APP_IDENTITY_POOL_ID"
       value = aws_cognito_identity_pool.app_identity_pool.id
     }
   }
