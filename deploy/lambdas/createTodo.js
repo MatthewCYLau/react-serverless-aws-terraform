@@ -8,12 +8,15 @@ AWS.config.update({ region: "us-east-1" });
 const ddb = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
 
 exports.handler = function(event, context, callback) {
-  var params = {
+  let responseCode = 200;
+  let responseBody = "";
+  const params = {
     TableName: "todos",
     Item: {
-      todoId: { S: context.awsRequestId },
-      name: { S: event.name },
-      description: { S: event.description }
+      todoId: { S: event.requestContext.requestId },
+      userId: { S: event.requestContext.identity.user },
+      name: { S: JSON.parse(event.body).name },
+      description: { S: JSON.parse(event.body).description }
     }
   };
 
@@ -21,9 +24,20 @@ exports.handler = function(event, context, callback) {
   ddb.putItem(params, function(err, data) {
     if (err) {
       console.log("Error", err);
+      responseCode = 500;
+      responseBody = err;
     } else {
       console.log("Success", data);
-      callback(null, data);
+      responseBody = data;
     }
+    const response = {
+      statusCode: responseCode,
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify(responseBody)
+    };
+    callback(null, response);
   });
 };

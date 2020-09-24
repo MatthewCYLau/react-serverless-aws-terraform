@@ -239,7 +239,7 @@ paths:
         passthroughBehavior: "when_no_match"
         httpMethod: "POST"
         contentHandling: "CONVERT_TO_TEXT"
-        type: "aws"
+        type: "aws_proxy"
     options:
       responses:
         200:
@@ -320,7 +320,7 @@ paths:
         passthroughBehavior: "when_no_match"
         httpMethod: "POST"
         contentHandling: "CONVERT_TO_TEXT"
-        type: "aws"
+        type: "aws_proxy"
     options:
       responses:
         200:

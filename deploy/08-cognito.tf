@@ -1,6 +1,5 @@
 resource "aws_cognito_user_pool" "app_user_pool" {
-  name = "react_serverless_aws_terraform_user_pool"
-  # ATTRIBUTES
+  name                     = "react_serverless_aws_terraform_user_pool"
   alias_attributes         = ["email"]
   auto_verified_attributes = ["email"]
 
@@ -17,18 +16,11 @@ resource "aws_cognito_user_pool_client" "app_user_pool_client" {
 
   user_pool_id = aws_cognito_user_pool.app_user_pool.id
 
-  # APP INTEGRATION
-  supported_identity_providers         = ["COGNITO"]
-  callback_urls                        = ["https://www.example.com"]
-  allowed_oauth_flows_user_pool_client = true
-  allowed_oauth_flows                  = ["code", "implicit"]
-  allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
-}
-
-# TO-DO remove domain?
-resource "aws_cognito_user_pool_domain" "app_user_pool_domain" {
-  domain       = "react-serverless-terraform"
-  user_pool_id = aws_cognito_user_pool.app_user_pool.id
+  supported_identity_providers = ["COGNITO"]
+  # callback_urls                        = ["https://www.example.com"]
+  # allowed_oauth_flows_user_pool_client = true
+  # allowed_oauth_flows                  = ["code", "implicit"]
+  # allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
 }
 
 resource "aws_cognito_identity_pool" "app_identity_pool" {
