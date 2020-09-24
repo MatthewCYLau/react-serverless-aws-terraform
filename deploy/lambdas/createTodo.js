@@ -14,7 +14,7 @@ exports.handler = function(event, context, callback) {
     TableName: "todos",
     Item: {
       todoId: { S: event.requestContext.requestId },
-      userId: { S: event.requestContext.identity.user },
+      userId: { S: event.requestContext.identity.accountId },
       name: { S: JSON.parse(event.body).name },
       description: { S: JSON.parse(event.body).description }
     }
