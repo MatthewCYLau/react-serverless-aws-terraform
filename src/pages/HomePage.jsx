@@ -114,15 +114,14 @@ const HomePage = () => {
                   {todo.description.S ? todo.description.S : todo.description}
                 </p>
                 {todo.todoId &&
-                  todo.username.S ===
-                    currnetUsername(
-                      <Button
-                        type="primary"
-                        onClick={() => removeTodo(todo.todoId.S)}
-                      >
-                        Done
-                      </Button>
-                    )}
+                  (todo.username.S === currnetUsername)(
+                    <Button
+                      type="primary"
+                      onClick={() => removeTodo(todo.todoId.S)}
+                    >
+                      Done
+                    </Button>
+                  )}
                 <Button>
                   {todo.todoId && (
                     <Link className="button" to={`/edit/${todo.todoId.S}`}>
