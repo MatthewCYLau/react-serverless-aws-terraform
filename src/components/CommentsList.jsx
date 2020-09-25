@@ -92,12 +92,15 @@ const CommentsList = ({ todoId, username }) => {
               title={comment.content.S}
               style={{ width: 300 }}
             >
-              <Button
-                type="primary"
-                onClick={() => removeComment(comment.commentId.S)}
-              >
-                Delete
-              </Button>
+              <p>{comment.username.S}</p>
+              {comment.username.S === username && (
+                <Button
+                  type="primary"
+                  onClick={() => removeComment(comment.commentId.S)}
+                >
+                  Delete
+                </Button>
+              )}
             </Card>
           ))}
         </div>
