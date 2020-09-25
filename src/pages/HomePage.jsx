@@ -4,17 +4,19 @@ import { PageHeader } from "antd";
 import { Card, Button, Input } from "antd";
 import "antd/dist/antd.css";
 import { Layout, Spin } from "antd";
-import { API } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 
 const { Content } = Layout;
 
 const HomePage = () => {
   const [todos, setTodos] = useState([]);
   const [loadingComplete, setLoadingComplete] = useState(false);
+  const [currnetUsername, setCurrnetUsername] = useState("");
   const initialFormState = { name: "", description: "" };
   const [formState, setFormState] = useState(initialFormState);
 
   useEffect(() => {
+    fetchCurrnetUsername();
     fetchTodos();
   }, []);
 
@@ -30,6 +32,16 @@ const HomePage = () => {
     } catch (err) {
       console.log(err);
       console.log("error fetching todos");
+    }
+  }
+
+  async function fetchCurrnetUsername() {
+    try {
+      const res = await Auth.currentUserInfo();
+      setCurrnetUsername(res.username);
+    } catch (err) {
+      console.log(err);
+      console.log("error fetching current username");
     }
   }
 
@@ -68,7 +80,7 @@ const HomePage = () => {
         <div className="site-layout-content">
           <PageHeader
             className="site-page-header"
-            title={"Welcome"}
+            title={`Welcome ${currnetUsername}`}
             subTitle="To-do list powered by AWS serverless architecture"
             style={styles.header}
           />
