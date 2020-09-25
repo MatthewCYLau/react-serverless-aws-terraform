@@ -15,6 +15,7 @@ exports.handler = function(event, context, callback) {
     Item: {
       commentId: { S: event.requestContext.requestId },
       identityId: { S: event.requestContext.identity.cognitoIdentityId },
+      username: { S: JSON.parse(event.body).username },
       content: { S: JSON.parse(event.body).content },
       todoId: { S: JSON.parse(event.body).todoId }
     }

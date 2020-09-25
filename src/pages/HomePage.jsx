@@ -48,7 +48,7 @@ const HomePage = () => {
   async function addTodo() {
     try {
       if (!formState.name || !formState.description) return;
-      const todo = { ...formState };
+      const todo = { ...formState, username: currnetUsername };
       setTodos([...todos, todo]);
       setFormState(initialFormState);
 

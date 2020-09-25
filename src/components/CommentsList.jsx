@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { PageHeader, Spin, Card, Input, Button } from "antd";
 import { API } from "aws-amplify";
 
-const CommentsList = ({ todoId }) => {
+const CommentsList = ({ todoId, username }) => {
   const initialFormState = { content: "" };
   const [formState, setFormState] = useState(initialFormState);
   const [comments, setComments] = useState([]);
@@ -31,7 +31,8 @@ const CommentsList = ({ todoId }) => {
       if (!formState.content) return;
       const comment = {
         ...formState,
-        todoId
+        todoId,
+        username
       };
       setFormState(initialFormState);
 

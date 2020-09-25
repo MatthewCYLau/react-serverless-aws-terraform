@@ -15,6 +15,7 @@ exports.handler = function(event, context, callback) {
     Item: {
       todoId: { S: event.requestContext.requestId },
       identityId: { S: event.requestContext.identity.cognitoIdentityId },
+      username: { S: JSON.parse(event.body).username },
       name: { S: JSON.parse(event.body).name },
       description: { S: JSON.parse(event.body).description }
     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Card, Button, Spin, Input, PageHeader } from "antd";
 import { Link } from "react-router-dom";
-import { API } from "aws-amplify";
+import { API, Auth } from "aws-amplify";
 import CommentsList from "../components/CommentsList";
 
 const { Content } = Layout;
@@ -19,7 +19,7 @@ const EditTodoPage = ({ location, history }) => {
   const [loadingComplete, setLoadingComplete] = useState(false);
 
   // current username state
-  // const [currentUsername, setCurrentUsername] = useState("");
+  const [currnetUsername, setCurrnetUsername] = useState("");
 
   const todoId = location.pathname.split("/")[2];
 
@@ -36,12 +36,19 @@ const EditTodoPage = ({ location, history }) => {
     }
   }
 
+  async function fetchCurrnetUsername() {
+    try {
+      const res = await Auth.currentUserInfo();
+      setCurrnetUsername(res.username);
+    } catch (err) {
+      console.log(err);
+      console.log("error fetching current username");
+    }
+  }
+
   async function editTodo() {
     try {
       if (!formState.name || !formState.description) return;
-
-      // const body = JSON.stringify(formState);
-      // await axios.patch(`${apiEndpoint}/todos/${todoId}`, body, config);
       const config = {
         body: formState,
         headers: {
@@ -61,6 +68,7 @@ const EditTodoPage = ({ location, history }) => {
 
   // When component mounts, fetchTodo by todoId
   useEffect(() => {
+    fetchCurrnetUsername();
     fetchTodo();
   }, []);
 
@@ -111,7 +119,7 @@ const EditTodoPage = ({ location, history }) => {
                 </Link>
               </Button>
             </Card>
-            <CommentsList todoId={todoId} />
+            <CommentsList todoId={todoId} username={currnetUsername} />
           </div>
         ) : (
           <Spin />
