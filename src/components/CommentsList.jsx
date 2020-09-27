@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { PageHeader, Spin, Card, Input, Button } from "antd";
 import { API } from "aws-amplify";
+import Likes from "./Likes";
 
 const CommentsList = ({ todoId, username }) => {
   const initialFormState = { content: "" };
@@ -17,7 +18,6 @@ const CommentsList = ({ todoId, username }) => {
 
   async function fetchComments() {
     try {
-      //const res = await axios.get(`${apiEndpoint}/comments?todoId=${todoId}`);
       const res = await API.get("todos", `/comments?todoId=${todoId}`);
       setComments(res.Items);
       setloadingComplete({ loadingComplete: true });
@@ -36,13 +36,6 @@ const CommentsList = ({ todoId, username }) => {
       };
       setFormState(initialFormState);
 
-      // const config = {
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   }
-      // };
-      // const body = JSON.stringify(comment);
-      // await axios.post(`${apiEndpoint}/comments`, body, config);
       const config = {
         body: comment,
         headers: {
@@ -59,7 +52,6 @@ const CommentsList = ({ todoId, username }) => {
   async function removeComment(id) {
     try {
       setComments(comments.filter(comment => comment.commentId.S !== id));
-      // await axios.delete(`${apiEndpoint}/comments/${id}`);
       await API.del("todos", `/comments/${id}`);
     } catch (err) {
       console.log("error removing comment:", err);
@@ -101,6 +93,7 @@ const CommentsList = ({ todoId, username }) => {
                   Delete
                 </Button>
               )}
+              <Likes commentID={comment.commentId.S} username={username} />
             </Card>
           ))}
         </div>

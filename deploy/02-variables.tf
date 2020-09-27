@@ -9,7 +9,7 @@ variable "github_project_name" {
 }
 
 variable "bucket_name" {
-  default = "matlau-aws-react-serverless"
+  default = "matlau-aws-react-serverless2"
 }
 
 variable "todos_table_name" {
