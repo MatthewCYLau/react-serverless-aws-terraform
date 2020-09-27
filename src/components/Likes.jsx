@@ -32,7 +32,8 @@ const Likes = ({ commentId, username }) => {
   };
 
   async function removeLike() {
-    const likeId = likes.filter(like => like.username.S === username)[0].likeId;
+    const likeId = likes.filter(like => like.username.S === username)[0].likeId
+      .S;
     try {
       setLikes(likes.filter(like => like.likeId.S !== likeId));
       await API.del("todos", `/likes/${likeId}`);
