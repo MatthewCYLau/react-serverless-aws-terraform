@@ -93,7 +93,7 @@ const CommentsList = ({ todoId, username }) => {
                   Delete
                 </Button>
               )}
-              <Likes commentID={comment.commentId.S} username={username} />
+              <Likes commentId={comment.commentId.S} username={username} />
             </Card>
           ))}
         </div>
