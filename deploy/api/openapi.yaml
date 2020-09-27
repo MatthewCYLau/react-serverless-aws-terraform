@@ -273,7 +273,7 @@ paths:
   /likes/{likeID}:
     delete:
       parameters:
-        - name: "commentID"
+        - name: "likeID"
           in: "path"
           required: true
           schema:

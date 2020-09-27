@@ -21,5 +21,5 @@ variable "comments_table_name" {
 }
 
 variable "likes_table_name" {
-  default = "like"
+  default = "likes"
 }
