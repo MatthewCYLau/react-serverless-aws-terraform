@@ -34,3 +34,27 @@ resource "aws_dynamodb_table" "dynamodb-table-comments" {
     projection_type = "ALL"
   }
 }
+
+resource "aws_dynamodb_table" "dynamodb-table-likes" {
+  name             = var.comments_table_name
+  billing_mode     = "PAY_PER_REQUEST"
+  hash_key         = "likeId"
+  stream_enabled   = true
+  stream_view_type = "NEW_AND_OLD_IMAGES"
+
+  attribute {
+    name = "likeId"
+    type = "S"
+  }
+
+  attribute {
+    name = "commentId"
+    type = "S"
+  }
+
+  global_secondary_index {
+    name            = "commentIdIndex"
+    hash_key        = "commentId"
+    projection_type = "ALL"
+  }
+}

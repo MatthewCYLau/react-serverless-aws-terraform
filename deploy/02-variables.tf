@@ -19,3 +19,7 @@ variable "todos_table_name" {
 variable "comments_table_name" {
   default = "comments"
 }
+
+variable "likes_table_name" {
+  default = "like"
+}
