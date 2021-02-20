@@ -6,7 +6,7 @@ A to-do list app which allows users to create, and read to-do's from DynamoDB
 
 App URL [here](http://matlau-aws-react-serverless2.s3-website-us-east-1.amazonaws.com/)
 
-![AWS Architecture](images/aws_react_serverless2.JPG)
+![AWS Architecture](images/aws_react_serverless3.JPG)
 
 ## Pre-requisite
 
