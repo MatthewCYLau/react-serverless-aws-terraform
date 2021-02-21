@@ -1,9 +1,5 @@
-provider "aws" {
-  region = "us-east-1"
-}
-
-resource "aws_s3_bucket" "react-serverless-s3-bucket" {
-  bucket        = var.bucket_name
+resource "aws_s3_bucket" "app" {
+  bucket        = var.app_name
   acl           = "public-read"
   force_destroy = true
 
@@ -14,7 +10,7 @@ resource "aws_s3_bucket" "react-serverless-s3-bucket" {
 }
 
 resource "aws_s3_bucket_policy" "s3_bucket_policy" {
-  bucket = aws_s3_bucket.react-serverless-s3-bucket.id
+  bucket = aws_s3_bucket.app.id
   policy = <<POLICY
 {
   "Version": "2012-10-17",
@@ -24,7 +20,9 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy" {
       "Effect": "Allow",
       "Principal": "*",
       "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::${var.bucket_name}/*"
+      "Resource": [
+        "${aws_s3_bucket.app.arn}/*"
+      ]
     }
   ]
 }
@@ -43,7 +41,7 @@ resource "aws_codepipeline" "react-serverless-codepipeline" {
   ]
 
   artifact_store {
-    location = aws_s3_bucket.react-serverless-s3-bucket.bucket
+    location = aws_s3_bucket.app.bucket
     type     = "S3"
 
   }
@@ -98,7 +96,7 @@ resource "aws_codepipeline" "react-serverless-codepipeline" {
       version         = "1"
 
       configuration = {
-        BucketName = aws_s3_bucket.react-serverless-s3-bucket.bucket
+        BucketName = aws_s3_bucket.app.bucket
         Extract    = "true"
       }
     }

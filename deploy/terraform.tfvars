@@ -1,0 +1,5 @@
+default_region      = "us-east-1"
+github_username     = "MatthewCYLau"
+github_project_name = "react-serverless-aws-terraform"
+app_name            = "react-serverless-app"
+environment         = "staging"

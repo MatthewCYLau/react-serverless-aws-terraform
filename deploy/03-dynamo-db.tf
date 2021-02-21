@@ -1,5 +1,5 @@
-resource "aws_dynamodb_table" "dynamodb-table-todos" {
-  name             = var.todos_table_name
+resource "aws_dynamodb_table" "todos" {
+  name             = "todos"
   billing_mode     = "PAY_PER_REQUEST"
   hash_key         = "todoId"
   stream_enabled   = true
@@ -11,8 +11,8 @@ resource "aws_dynamodb_table" "dynamodb-table-todos" {
   }
 }
 
-resource "aws_dynamodb_table" "dynamodb-table-comments" {
-  name             = var.comments_table_name
+resource "aws_dynamodb_table" "comments" {
+  name             = "comments"
   billing_mode     = "PAY_PER_REQUEST"
   hash_key         = "commentId"
   stream_enabled   = true
@@ -35,8 +35,8 @@ resource "aws_dynamodb_table" "dynamodb-table-comments" {
   }
 }
 
-resource "aws_dynamodb_table" "dynamodb-table-likes" {
-  name             = var.likes_table_name
+resource "aws_dynamodb_table" "likes" {
+  name             = "likes"
   billing_mode     = "PAY_PER_REQUEST"
   hash_key         = "likeId"
   stream_enabled   = true

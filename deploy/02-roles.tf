@@ -35,8 +35,8 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
         "s3:PutObject"
       ],
       "Resource": [
-        "${aws_s3_bucket.react-serverless-s3-bucket.arn}",
-        "${aws_s3_bucket.react-serverless-s3-bucket.arn}/*"
+        "${aws_s3_bucket.app.arn}",
+        "${aws_s3_bucket.app.arn}/*"
       ]
     },
     {
@@ -83,7 +83,7 @@ resource "aws_iam_role_policy" "codebuild_policy" {
         {
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::${var.bucket_name}/*"
+              "${aws_s3_bucket.app.arn}/*"
             ],
             "Action": [
                 "s3:PutObject",
