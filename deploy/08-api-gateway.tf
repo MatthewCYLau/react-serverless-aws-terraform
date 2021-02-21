@@ -5,10 +5,6 @@ resource "aws_api_gateway_rest_api" "react-serverless" {
 
 }
 
-output "base_url" {
-  value = aws_api_gateway_deployment.api_gateway_deployment.invoke_url
-}
-
 data "template_file" "api_definition" {
   template = file("api/openapi.yaml")
   vars = {

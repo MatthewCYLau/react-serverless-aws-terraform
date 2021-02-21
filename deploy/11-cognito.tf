@@ -17,10 +17,6 @@ resource "aws_cognito_user_pool_client" "app_user_pool_client" {
   user_pool_id = aws_cognito_user_pool.app_user_pool.id
 
   supported_identity_providers = ["COGNITO"]
-  # callback_urls                        = ["https://www.example.com"]
-  # allowed_oauth_flows_user_pool_client = true
-  # allowed_oauth_flows                  = ["code", "implicit"]
-  # allowed_oauth_scopes                 = ["phone", "email", "openid", "profile", "aws.cognito.signin.user.admin"]
 }
 
 resource "aws_cognito_identity_pool" "app_identity_pool" {
@@ -93,14 +89,3 @@ resource "aws_cognito_identity_pool_roles_attachment" "id_pool_roles_attachment"
   }
 }
 
-output "user_pool_id" {
-  value = aws_cognito_user_pool.app_user_pool.id
-}
-
-output "user_pool_client_id" {
-  value = aws_cognito_user_pool_client.app_user_pool_client.id
-}
-
-output "identity_pool_id" {
-  value = aws_cognito_identity_pool.app_identity_pool.id
-}
