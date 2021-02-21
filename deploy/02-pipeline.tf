@@ -9,6 +9,10 @@ resource "aws_s3_bucket" "app" {
   }
 }
 
+output "app_url" {
+  value = aws_s3_bucket.app.website_endpoint
+}
+
 resource "aws_s3_bucket_policy" "s3_bucket_policy" {
   bucket = aws_s3_bucket.app.id
   policy = <<POLICY

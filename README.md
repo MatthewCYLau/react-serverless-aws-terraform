@@ -10,7 +10,7 @@ App URL [here](http://matlau-aws-react-serverless2.s3-website-us-east-1.amazonaw
 
 ## Pre-requisite
 
-Make sure you have installed [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli), [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html#cliv2-mac-prereq), and configured a `default` AWS CLI profile (see doc [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-profiles))
+- Make sure you have installed [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli), [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-mac.html#cliv2-mac-prereq), and configured a `default` AWS CLI profile (see doc [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-profiles))
 
 ```bash
 terraform -help # prints Terraform options
@@ -21,24 +21,18 @@ aws configure # configure your AWS CLI profile
 
 ## Configuration
 
-Create a Github project, and generate a personal access token (see doc [here](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token))
+- Create a Github project, and generate a personal access token (see doc [here](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token))
 
-Populate `deploy/02-variables.tf`
+- Create an [S3 bucket](https://www.terraform.io/docs/language/settings/backends/s3.html) to store Terraform state. Populate bucket name in `01-main.tf`
+
+- Populate `terraform.tfvars`:
 
 ```bash
-variable "github_token" {}
-
-variable "github_username" {
-  default = "your_github_username"
-}
-
-variable "github_project_name" {
-  default = "your_github_project_name"
-}
-
-variable "bucket_name" {
-  default = "your_unique_s3_bucket_name"
-}
+default_region      = "<YOUR_AWS_DEFAULT_REGION>"
+github_username     = "<YOUR_GITHUB_USERNAME>"
+github_project_name = "<YOUR_GITHUB_PROJECT_NAME>"
+app_name            = "<GIVE_YOUR_APP_A_NAME!>"
+environment         = "<ENVIRONMENT_NAME>"
 ```
 
 ## Deploy
@@ -46,13 +40,13 @@ variable "bucket_name" {
 ```bash
 cd deploy # change to deploy directory
 terraform init # initialises Terraform
-terraform apply # deploys AWS stack
+terraform apply # deploys AWS stack. See output for app url
 terraform destroy # destroys AWS stack
 ```
 
-When prompted for `github_token`, provide the value and hit Return
+- When prompted for `github_token`, provide the value and hit Return. Alternatively, create a [local environment variable](https://www.terraform.io/docs/language/values/variables.html#environment-variables) named `TF_VAR_github_token`
 
-To add a new Lambda function i.e. `updateTodo.js`, navigate to `deploy/lambdas` and run `zip updateTodo.zip updateTodo.js` to generate the zip file for the Lambda function
+- To add a new Lambda function i.e. `updateTodo.js`, navigate to `deploy/lambdas` and run `zip updateTodo.zip updateTodo.js` to generate the zip file for the Lambda function
 
 ## Contributing
 
