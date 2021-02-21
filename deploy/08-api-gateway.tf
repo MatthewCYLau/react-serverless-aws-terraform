@@ -1,6 +1,6 @@
-resource "aws_api_gateway_rest_api" "react-serverless" {
-  name        = "ReactServerless"
-  description = "Terraform Serverless Application Example"
+resource "aws_api_gateway_rest_api" "app" {
+  name        = "${var.app_name}-api"
+  description = "React Serverless App API"
   body        = data.template_file.api_definition.rendered
 
 }
@@ -22,10 +22,10 @@ data "template_file" "api_definition" {
   }
 }
 
-resource "aws_api_gateway_deployment" "api_gateway_deployment" {
+resource "aws_api_gateway_deployment" "app" {
   depends_on = [
-    aws_api_gateway_rest_api.react-serverless
+    aws_api_gateway_rest_api.app
   ]
-  rest_api_id = aws_api_gateway_rest_api.react-serverless.id
-  stage_name  = "dev"
+  rest_api_id = aws_api_gateway_rest_api.app.id
+  stage_name  = var.environment
 }

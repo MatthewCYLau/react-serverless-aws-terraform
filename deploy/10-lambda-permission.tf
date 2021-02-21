@@ -3,7 +3,7 @@ resource "aws_lambda_permission" "lambda_permission_get_todos" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.get_todos.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/GET/todos"
+  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/GET/todos"
 }
 
 resource "aws_lambda_permission" "lambda_permission_get_todo_by_id" {
@@ -11,7 +11,7 @@ resource "aws_lambda_permission" "lambda_permission_get_todo_by_id" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.get_todo_by_id.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/GET/todos/*"
+  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/GET/todos/*"
 }
 
 resource "aws_lambda_permission" "lambda_permission_delete_todo_by_id" {
@@ -19,7 +19,7 @@ resource "aws_lambda_permission" "lambda_permission_delete_todo_by_id" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.delete_todo_by_id.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/DELETE/todos/*"
+  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/DELETE/todos/*"
 }
 
 resource "aws_lambda_permission" "lambda_permission_update_todo_by_id" {
@@ -27,7 +27,7 @@ resource "aws_lambda_permission" "lambda_permission_update_todo_by_id" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.update_todo_by_id.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/PUT/todos/*"
+  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/PUT/todos/*"
 }
 
 resource "aws_lambda_permission" "lambda_permission_create_todo" {
@@ -36,7 +36,7 @@ resource "aws_lambda_permission" "lambda_permission_create_todo" {
   function_name = aws_lambda_function.create_todo.function_name
   principal     = "apigateway.amazonaws.com"
   # More: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html
-  source_arn = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/POST/todos"
+  source_arn = "${aws_api_gateway_rest_api.app.execution_arn}/*/POST/todos"
 }
 
 resource "aws_lambda_permission" "lambda_permission_create_comment" {
@@ -45,7 +45,7 @@ resource "aws_lambda_permission" "lambda_permission_create_comment" {
   function_name = aws_lambda_function.create_comment.function_name
   principal     = "apigateway.amazonaws.com"
   # More: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html
-  source_arn = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/POST/comments"
+  source_arn = "${aws_api_gateway_rest_api.app.execution_arn}/*/POST/comments"
 }
 
 resource "aws_lambda_permission" "lambda_permission_get_comments" {
@@ -54,7 +54,7 @@ resource "aws_lambda_permission" "lambda_permission_get_comments" {
   function_name = aws_lambda_function.get_comments.function_name
   principal     = "apigateway.amazonaws.com"
   # More: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html
-  source_arn = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/GET/comments"
+  source_arn = "${aws_api_gateway_rest_api.app.execution_arn}/*/GET/comments"
 }
 
 resource "aws_lambda_permission" "lambda_permission_delete_comment_by_id" {
@@ -62,7 +62,7 @@ resource "aws_lambda_permission" "lambda_permission_delete_comment_by_id" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.delete_comment_by_id.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/DELETE/comments/*"
+  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/DELETE/comments/*"
 }
 
 resource "aws_lambda_permission" "lambda_permission_create_like" {
@@ -71,7 +71,7 @@ resource "aws_lambda_permission" "lambda_permission_create_like" {
   function_name = aws_lambda_function.create_like.function_name
   principal     = "apigateway.amazonaws.com"
   # More: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html
-  source_arn = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/POST/likes"
+  source_arn = "${aws_api_gateway_rest_api.app.execution_arn}/*/POST/likes"
 }
 
 resource "aws_lambda_permission" "lambda_permission_get_likes" {
@@ -80,7 +80,7 @@ resource "aws_lambda_permission" "lambda_permission_get_likes" {
   function_name = aws_lambda_function.get_likes.function_name
   principal     = "apigateway.amazonaws.com"
   # More: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-control-access-using-iam-policies-to-invoke-api.html
-  source_arn = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/GET/likes"
+  source_arn = "${aws_api_gateway_rest_api.app.execution_arn}/*/GET/likes"
 }
 
 resource "aws_lambda_permission" "lambda_permission_delete_like_by_id" {
@@ -88,5 +88,5 @@ resource "aws_lambda_permission" "lambda_permission_delete_like_by_id" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.delete_like_by_id.function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*/DELETE/likes/*"
+  source_arn    = "${aws_api_gateway_rest_api.app.execution_arn}/*/DELETE/likes/*"
 }

@@ -60,7 +60,7 @@ resource "aws_iam_role_policy" "id_pool_authenticated_role_policy" {
   name = "authenticated_policy"
   role = aws_iam_role.id_pool_authenticated_role.id
   depends_on = [
-    aws_api_gateway_deployment.api_gateway_deployment
+    aws_api_gateway_deployment.app
   ]
 
   policy = <<EOF
@@ -73,7 +73,7 @@ resource "aws_iam_role_policy" "id_pool_authenticated_role_policy" {
         "execute-api:Invoke"
       ],
       "Resource": [
-        "${aws_api_gateway_rest_api.react-serverless.execution_arn}/*"
+        "${aws_api_gateway_rest_api.app.execution_arn}/*"
       ]
     }
   ]

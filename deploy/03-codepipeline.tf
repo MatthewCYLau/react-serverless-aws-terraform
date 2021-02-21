@@ -2,7 +2,7 @@ resource "aws_codepipeline" "app" {
   name     = var.app_name
   role_arn = aws_iam_role.codepipeline_role.arn
   depends_on = [
-    aws_api_gateway_deployment.api_gateway_deployment,
+    aws_api_gateway_deployment.app,
     aws_cognito_user_pool.app_user_pool,
     aws_cognito_user_pool_client.app_user_pool_client,
     aws_cognito_identity_pool.app_identity_pool
