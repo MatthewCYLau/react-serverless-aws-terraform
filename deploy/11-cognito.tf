@@ -9,6 +9,12 @@ resource "aws_cognito_user_pool" "app_user_pool" {
     name                = "email"
     required            = true
   }
+
+  lifecycle {
+    ignore_changes = [
+      schema ### AWS doesn't allow schema updates, so every build will re-create the user pool unless we ignore this bit
+    ]
+  }
 }
 
 resource "aws_cognito_user_pool_client" "app_user_pool_client" {

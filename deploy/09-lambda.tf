@@ -153,12 +153,9 @@ resource "aws_iam_role_policy" "lambda_policy" {
                 "dynamodb:PutItem"
             ],
             "Resource": [
-              "arn:aws:dynamodb:*:*:table/todos",
-              "arn:aws:dynamodb:*:*:table/comments",
-              "arn:aws:dynamodb:*:*:table/todos/index/*",
-              "arn:aws:dynamodb:*:*:table/comments/index/*",
-              "arn:aws:dynamodb:*:*:table/likes",
-              "arn:aws:dynamodb:*:*:table/likes/index/*"
+              "${aws_dynamodb_table.todos.arn}*",
+              "${aws_dynamodb_table.comments.arn}*",
+              "${aws_dynamodb_table.likes.arn}*"
             ]
         }
     ]
