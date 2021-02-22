@@ -12,12 +12,27 @@ exports.handler = function(event, context, callback) {
     TableName: "todos"
   };
 
+  let responseCode = 200;
+  let responseBody = "";
+
   ddb.scan(params, function(err, data) {
     if (err) {
       console.log("Error", err);
+      responseCode = 500;
+      responseBody = err;
     } else {
       console.log("Success", data);
-      callback(null, data);
+      responseBody = data;
     }
+    const response = {
+      statusCode: responseCode,
+      headers: {
+        "content-type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify(responseBody)
+    };
+  
+    callback(null, response);
   });
 };
