@@ -3,10 +3,10 @@ info:
   title: "ReactServerless"
   version: "2020-08-20T12:57:36Z"
 paths:
-  /todos/{todoID}:
+  /todos/{todoId}:
     get:
       parameters:
-        - name: "todoID"
+        - name: "todoId"
           in: "path"
           required: true
           schema:
@@ -37,7 +37,7 @@ paths:
         type: "aws_proxy"
     put:
       parameters:
-        - name: "todoID"
+        - name: "todoId"
           in: "path"
           required: true
           schema:
@@ -68,7 +68,7 @@ paths:
         type: "aws_proxy"
     delete:
       parameters:
-        - name: "todoID"
+        - name: "todoId"
           in: "path"
           required: true
           schema:
@@ -127,10 +127,10 @@ paths:
           application/json: '{"statusCode": 200}'
         passthroughBehavior: "when_no_match"
         type: "mock"
-  /comments/{commentID}:
+  /comments/{commentId}:
     delete:
       parameters:
-        - name: "commentID"
+        - name: "commentId"
           in: "path"
           required: true
           schema:
@@ -270,10 +270,10 @@ paths:
           application/json: '{"statusCode": 200}'
         passthroughBehavior: "when_no_match"
         type: "mock"
-  /likes/{likeID}:
+  /likes/{likeId}:
     delete:
       parameters:
-        - name: "likeID"
+        - name: "likeId"
           in: "path"
           required: true
           schema:
