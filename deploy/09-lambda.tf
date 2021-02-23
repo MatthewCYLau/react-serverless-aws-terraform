@@ -1,17 +1,30 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-    }
-  }
+resource "aws_s3_bucket" "lambdas" {
+  force_destroy = true
+}
+
+# get todos lambda
+data "archive_file" "get_to_do_zip" {
+  type        = "zip"
+  source_file = "lambdas/getTodos.js"
+  output_path = "lambdas/getTodos.zip"
+}
+
+resource "aws_s3_bucket_object" "lambda_get_todos" {
+  key    = "${random_id.id.hex}-object"
+  bucket = aws_s3_bucket.lambdas.id
+  source = data.archive_file.get_to_do_zip.output_path
+  etag   = data.archive_file.get_to_do_zip.output_base64sha256
 }
 
 resource "aws_lambda_function" "get_todos" {
   function_name = "GetTodos"
-  filename      = "lambdas/getTodos.zip"
-  handler       = "getTodos.handler"
-  runtime       = "nodejs10.x"
-  role          = aws_iam_role.lambda_exec.arn
+  s3_bucket = aws_s3_bucket.lambdas.id
+  s3_key    = aws_s3_bucket_object.lambda_get_todos.id
+
+  source_code_hash = data.archive_file.get_to_do_zip.output_base64sha256
+  handler          = "getTodos.handler"
+  runtime          = "nodejs10.x"
+  role             = aws_iam_role.lambda_exec.arn
 }
 
 resource "aws_lambda_function" "get_todo_by_id" {
