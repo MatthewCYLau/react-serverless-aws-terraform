@@ -1,38 +1,34 @@
-resource "aws_s3_bucket" "lambdas" {
-  force_destroy = true
-}
 
 # get todos lambda
-data "archive_file" "get_to_do_zip" {
+data "archive_file" "get_todos_zip" {
   type        = "zip"
   source_file = "lambdas/getTodos.js"
   output_path = "lambdas/getTodos.zip"
 }
 
-resource "aws_s3_bucket_object" "lambda_get_todos" {
-  key    = "${random_id.id.hex}-object"
-  bucket = aws_s3_bucket.lambdas.id
-  source = data.archive_file.get_to_do_zip.output_path
-  etag   = data.archive_file.get_to_do_zip.output_base64sha256
-}
-
 resource "aws_lambda_function" "get_todos" {
-  function_name = "GetTodos"
-  s3_bucket = aws_s3_bucket.lambdas.id
-  s3_key    = aws_s3_bucket_object.lambda_get_todos.id
-
-  source_code_hash = data.archive_file.get_to_do_zip.output_base64sha256
+  function_name    = "GetTodos"
+  filename         = data.archive_file.get_todos_zip.output_path
+  source_code_hash = data.archive_file.get_todos_zip.output_base64sha256
   handler          = "getTodos.handler"
   runtime          = "nodejs10.x"
   role             = aws_iam_role.lambda_exec.arn
 }
 
+# get todo by ID lambda
+data "archive_file" "get_todo_by_id_zip" {
+  type        = "zip"
+  source_file = "lambdas/getTodoById.js"
+  output_path = "lambdas/getTodoById.zip"
+}
+
 resource "aws_lambda_function" "get_todo_by_id" {
-  function_name = "GetTodoById"
-  filename      = "lambdas/getTodoById.zip"
-  handler       = "getTodoById.handler"
-  runtime       = "nodejs10.x"
-  role          = aws_iam_role.lambda_exec.arn
+  function_name    = "GetTodoById"
+  filename         = data.archive_file.get_todo_by_id_zip.output_path
+  source_code_hash = data.archive_file.get_todo_by_id_zip.output_base64sha256
+  handler          = "getTodoById.handler"
+  runtime          = "nodejs10.x"
+  role             = aws_iam_role.lambda_exec.arn
 }
 
 resource "aws_lambda_function" "update_todo_by_id" {
