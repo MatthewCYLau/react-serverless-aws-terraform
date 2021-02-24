@@ -3,6 +3,13 @@ resource "aws_cognito_user_pool" "app_user_pool" {
   alias_attributes         = ["email"]
   auto_verified_attributes = ["email"]
 
+  password_policy {
+    minimum_length    = 6
+    require_lowercase = false
+    require_numbers   = false
+    require_symbols   = false
+    require_uppercase = false
+  }
   schema {
     attribute_data_type = "String"
     mutable             = true

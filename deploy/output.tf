@@ -18,11 +18,3 @@ output "user_pool_client_id" {
 output "identity_pool_id" {
   value = aws_cognito_identity_pool.app_identity_pool.id
 }
-
-output "queue_url" {
-  value = aws_sqs_queue.app_queue.id
-}
-
-output "queue_arn" {
-  value = aws_sqs_queue.app_queue.arn
-}
