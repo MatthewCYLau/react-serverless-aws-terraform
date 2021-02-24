@@ -19,6 +19,8 @@ data "template_file" "api_definition" {
     lambda_uri_create_like          = aws_lambda_function.create_like.invoke_arn
     lambda_uri_get_likes            = aws_lambda_function.get_likes.invoke_arn
     lambda_uri_delete_like_by_id    = aws_lambda_function.delete_like_by_id.invoke_arn
+    apig_invocation_uri             = "arn:aws:apigateway:${var.default_region}:sqs:path/${data.aws_caller_identity.current.account_id}/${aws_sqs_queue.app_queue.name}"
+    apig_sqs_send_msg_role          = aws_iam_role.apig_sqs_send_msg.arn
   }
 }
 
