@@ -46,8 +46,6 @@ terraform destroy # destroys AWS stack
 
 - When prompted for `github_token`, provide the value and hit Return. Alternatively, create a [local environment variable](https://www.terraform.io/docs/language/values/variables.html#environment-variables) named `TF_VAR_github_token`
 
-- To add a new Lambda function i.e. `updateTodo.js`, navigate to `deploy/lambdas` and run `zip updateTodo.zip updateTodo.js` to generate the zip file for the Lambda function
-
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
