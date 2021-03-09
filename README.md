@@ -4,7 +4,7 @@ A reference project to deploy a serverless, full-stack React app onto AWS with T
 
 A to-do list app which allows users to create, and read to-do's from DynamoDB
 
-App URL [here](http://matlau-aws-react-serverless2.s3-website-us-east-1.amazonaws.com/)
+<a href="https://www.buymeacoffee.com/matlau" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yello_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 ![AWS Architecture](images/aws_react_serverless4.JPG)
 
