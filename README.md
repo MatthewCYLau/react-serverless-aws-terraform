@@ -4,8 +4,6 @@ A reference project to deploy a serverless, full-stack React app onto AWS with T
 
 A to-do list app which allows users to create, and read to-do's from DynamoDB
 
-<a href="https://www.buymeacoffee.com/matlau" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
 ![AWS Architecture](images/aws_react_serverless4.JPG)
 
 ## Pre-requisite
@@ -51,6 +49,10 @@ terraform destroy # destroys AWS stack
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
+If you find this project helpful please give a :start: or even better buy me a coffee :coffee: :point_down: because I'm a caffeine addict :sweat_smile:
+
+<a href="https://www.buymeacoffee.com/matlau" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 ## License
 
