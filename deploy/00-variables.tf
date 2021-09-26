@@ -9,3 +9,7 @@ variable "app_name" {}
 variable "environment" {}
 
 variable "default_region" {}
+
+variable "common_tags" {
+  description = "Common tags to be applied to all components."
+}
