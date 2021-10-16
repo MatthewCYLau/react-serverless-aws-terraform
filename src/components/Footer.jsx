@@ -3,7 +3,7 @@ import { Layout } from "antd";
 const { Footer } = Layout;
 
 const AppFooter = () => (
-  <Footer style={{ textAlign: "center" }}>Matthew Lau ©2020</Footer>
+  <Footer style={{ textAlign: "center" }}>Matthew Lau ©2021</Footer>
 );
 
 export default AppFooter;
