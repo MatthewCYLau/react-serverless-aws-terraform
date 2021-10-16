@@ -59,6 +59,7 @@ yarn start # visit app at http://localhost:3000/
 
 - Purchase a domain name on [Amazon Route 53](https://aws.amazon.com/route53/)
 - Create an email address for your Route 53 custom domain. Set-up rule to forward emails to `admin@<your_custom_domain>` to your personal email address. See tutorial [here](https://medium.com/responsetap-engineering/easily-create-email-addresses-for-your-route53-custom-domain-589d099dd0f2)
+- Add an MX record for your domain. See documentation [here](https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-mx-record.html)
 - Approve email validation requests from [AWS Certificate Manager](https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html)
 - Add two DNS A records to point `<your_custom_domain>`, and `www.<your_custom_domain>` to the associated CloudFront distirubtions. See reference documentation [here](`<your_custom_domain>`)
 
