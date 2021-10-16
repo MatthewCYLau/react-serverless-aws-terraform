@@ -4,6 +4,8 @@ A reference project to deploy a serverless, full-stack React app onto AWS with T
 
 A to-do list app which allows users to create, and read to-do's from DynamoDB
 
+App URL [here](https://www.mattlau.co.uk/)
+
 ![AWS Architecture](images/aws_react_serverless4.JPG)
 
 ## Pre-requisite
@@ -43,6 +45,13 @@ terraform destroy # destroys AWS stack
 ```
 
 - When prompted for `github_token`, provide the value and hit Return. Alternatively, create a [local environment variable](https://www.terraform.io/docs/language/values/variables.html#environment-variables) named `TF_VAR_github_token`
+
+## Hosting website securely on AWS with a valid SSL certificate
+
+- Purchase a domain name on [Amazon Route 53](https://aws.amazon.com/route53/)
+- Create an email address for your Route 53 custom domain. Set-up rule to forward emails to `admin@<your_custom_domain>` to your personal email address. See tutorial [here](https://medium.com/responsetap-engineering/easily-create-email-addresses-for-your-route53-custom-domain-589d099dd0f2)
+- Approve email validation requests from [AWS Certificate Manager](https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html)
+- Add two DNS A records to point `<your_custom_domain>`, and `www.<your_custom_domain>` to the associated CloudFront distirubtions. See reference documentation [here](`<your_custom_domain>`)
 
 ## Contributing
 
