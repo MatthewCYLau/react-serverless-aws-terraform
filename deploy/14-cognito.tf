@@ -4,11 +4,12 @@ resource "aws_cognito_user_pool" "app_user_pool" {
   auto_verified_attributes = ["email"]
 
   password_policy {
-    minimum_length    = 6
-    require_lowercase = false
-    require_numbers   = false
-    require_symbols   = false
-    require_uppercase = false
+    minimum_length                   = 6
+    require_lowercase                = false
+    require_numbers                  = false
+    require_symbols                  = false
+    require_uppercase                = false
+    temporary_password_validity_days = 7
   }
   schema {
     attribute_data_type = "String"
