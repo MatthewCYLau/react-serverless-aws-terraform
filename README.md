@@ -46,6 +46,15 @@ terraform destroy # destroys AWS stack
 
 - When prompted for `github_token`, provide the value and hit Return. Alternatively, create a [local environment variable](https://www.terraform.io/docs/language/values/variables.html#environment-variables) named `TF_VAR_github_token`
 
+## Run app locally
+
+- Run `terraform output` to print AWS resources URL/IDs
+- Update `src/conf/config.js` with the associated AWS resources URL/IDs
+
+```bash
+yarn start # visit app at http://localhost:3000/
+```
+
 ## Hosting website securely on AWS with a valid SSL certificate
 
 - Purchase a domain name on [Amazon Route 53](https://aws.amazon.com/route53/)
