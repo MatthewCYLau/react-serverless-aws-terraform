@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "app" {
+resource "aws_s3_bucket" "www_bucket" {
   bucket        = "www.${var.bucket_name}"
   acl           = "public-read"
   policy        = templatefile("policy/s3-policy.json", { bucket = "www.${var.bucket_name}" })
@@ -33,7 +33,7 @@ resource "aws_s3_bucket" "root_bucket" {
 }
 
 # resource "aws_s3_bucket_policy" "this" {
-#   bucket = aws_s3_bucket.app.id
+#   bucket = aws_s3_bucket.www_bucket.id
 #   policy = <<POLICY
 # {
 #   "Version": "2012-10-17",
@@ -44,7 +44,7 @@ resource "aws_s3_bucket" "root_bucket" {
 #       "Principal": "*",
 #       "Action": "s3:GetObject",
 #       "Resource": [
-#         "${aws_s3_bucket.app.arn}/*"
+#         "${aws_s3_bucket.www_bucket.arn}/*"
 #       ]
 #     }
 #   ]

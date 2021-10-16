@@ -9,7 +9,7 @@ resource "aws_codepipeline" "app" {
   ]
 
   artifact_store {
-    location = aws_s3_bucket.app.bucket
+    location = aws_s3_bucket.www_bucket.bucket
     type     = "S3"
 
   }
@@ -64,7 +64,7 @@ resource "aws_codepipeline" "app" {
       version         = "1"
 
       configuration = {
-        BucketName = aws_s3_bucket.app.bucket
+        BucketName = aws_s3_bucket.www_bucket.bucket
         Extract    = "true"
       }
     }

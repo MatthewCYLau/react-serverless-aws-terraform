@@ -1,6 +1,6 @@
 output "app_url" {
   description = "The website end-point of the S3 bucket"
-  value       = aws_s3_bucket.app.website_endpoint
+  value       = aws_s3_bucket.www_bucket.website_endpoint
 }
 
 output "api_base_url" {

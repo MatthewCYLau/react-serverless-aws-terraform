@@ -36,7 +36,7 @@ resource "aws_iam_role_policy" "codebuild_policy" {
                 "s3:GetBucketLocation"
             ],
             "Resource": [
-              "${aws_s3_bucket.app.arn}/*"
+              "${aws_s3_bucket.www_bucket.arn}/*"
             ]
         },
         {
