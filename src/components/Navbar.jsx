@@ -16,6 +16,9 @@ const Navbar = () => (
         <Link to="/about">About</Link>
       </Menu.Item>
       <Menu.Item key="3">
+        <Link to="/contactus">Contact Us</Link>
+      </Menu.Item>
+      <Menu.Item key="4">
         <AmplifySignOut />
       </Menu.Item>
     </Menu>
