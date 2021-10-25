@@ -128,7 +128,7 @@ const HomePage = () => {
                     </Link>
                   )}
                 </Button>
-                  <p>
+                  <p style={{paddingTop:"20px", color:'#ff9900'}}>
                   {todo.username.S}
                   </p>
               </Card>
