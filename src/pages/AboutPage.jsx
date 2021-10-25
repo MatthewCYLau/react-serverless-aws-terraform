@@ -15,6 +15,10 @@ const AboutPage = () => {
             style={styles.header}
           />
         </div>
+        <div>
+          <p style={{ color: "#7cb305"}} >This is a paragraph in the About Us page.</p>
+        </div>
+
       </Content>
     </div>
   );
