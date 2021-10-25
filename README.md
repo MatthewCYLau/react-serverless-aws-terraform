@@ -52,6 +52,7 @@ terraform destroy # destroys AWS stack
 - Update `src/conf/config.js` with the associated AWS resources URL/IDs
 
 ```bash
+npm install # installs Node dependencies
 yarn start # visit app at http://localhost:3000/
 ```
 
