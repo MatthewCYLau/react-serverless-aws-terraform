@@ -128,6 +128,9 @@ const HomePage = () => {
                     </Link>
                   )}
                 </Button>
+                  <p>
+                  {todo.username.S}
+                  </p>
               </Card>
             ))}
           </div>
