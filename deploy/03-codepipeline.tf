@@ -69,4 +69,21 @@ resource "aws_codepipeline" "app" {
       }
     }
   }
+
+  stage {
+    name = "Invalide-Cloudfront-Cache"
+
+    action {
+      name            = "Invalide-Cloudfront-cache"
+      category        = "Build"
+      owner           = "AWS"
+      provider        = "CodeBuild"
+      input_artifacts = ["source_output"]
+      version         = "1"
+
+      configuration = {
+        ProjectName = aws_codebuild_project.invalidate_cache.name
+      }
+    }
+  }
 }

@@ -48,6 +48,16 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
       "Resource": [
         "${aws_codebuild_project.app.arn}"
       ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+          "codebuild:StartBuild",
+          "codebuild:BatchGetBuilds"
+      ],
+      "Resource": [
+        "${aws_codebuild_project.invalidate_cache.arn}" 
+      ]
     }
   ]
 }
