@@ -44,7 +44,7 @@ resource "aws_codebuild_project" "invalidate_cache" {
   name          = "invalidate-cloudfront-cache"
   description   = "Invalidate Cloudfront cache"
   build_timeout = "5"
-  service_role  = aws_iam_role.codebuild_role.arn
+  service_role  = aws_iam_role.codebuild_invalidate_cloudfront_role.arn
 
   artifacts {
     type = "CODEPIPELINE"

@@ -94,6 +94,17 @@ resource "aws_iam_role_policy" "codebuild_invalidate_cloudfront_policy" {
               "${aws_cloudfront_distribution.www_s3_distribution.arn}", 
               "${aws_cloudfront_distribution.root_s3_distribution.arn}"
             ]
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": [
+            "*"
+          ]
         }
     ]
 }
