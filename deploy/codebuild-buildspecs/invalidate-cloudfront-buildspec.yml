@@ -4,5 +4,5 @@ phases:
   build:
     commands:
       - echo Invalidating Cloudfront cache
-      - aws cloudfront create-invalidation --distribution-id ${ROOT_S3_HOSTED_ZONE_ID} --paths "/*";
-      - aws cloudfront create-invalidation --distribution-id ${WWW_S3_HOSTED_ZONE_ID} --paths "/*";
+      - aws cloudfront create-invalidation --distribution-id $ROOT_S3_HOSTED_ZONE_ID --paths "/*";
+      - aws cloudfront create-invalidation --distribution-id $WWW_S3_HOSTED_ZONE_ID --paths "/*";
