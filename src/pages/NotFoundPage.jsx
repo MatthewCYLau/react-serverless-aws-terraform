@@ -4,7 +4,7 @@ import { Layout } from "antd";
 
 const { Content } = Layout;
 
-const AboutPage = () => {
+const NotFoundPage = () => {
   return (
     <div>
       <Content style={{ padding: "0 50px" }}>
@@ -15,6 +15,7 @@ const AboutPage = () => {
             style={styles.header}
           />
         </div>
+        Not found!
       </Content>
     </div>
   );
@@ -22,15 +23,15 @@ const AboutPage = () => {
 
 const styles = {
   input: {
-    margin: "10px 0"
+    margin: "10px 0",
   },
   submit: {
     margin: "10px 0",
-    marginBottom: "20px"
+    marginBottom: "20px",
   },
   header: {
-    paddingLeft: "0px"
-  }
+    paddingLeft: "0px",
+  },
 };
 
-export default AboutPage;
+export default NotFoundPage;
