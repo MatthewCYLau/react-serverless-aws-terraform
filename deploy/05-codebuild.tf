@@ -57,13 +57,13 @@ resource "aws_codebuild_project" "invalidate_cache" {
     image_pull_credentials_type = "CODEBUILD"
 
     environment_variable {
-      name  = "ROOT_S3_HOSTED_ZONE_ID"
-      value = aws_cloudfront_distribution.root_s3_distribution.hosted_zone_id
+      name  = "ROOT_S3_DISTRIBUTION_ID"
+      value = aws_cloudfront_distribution.root_s3_distribution.id
     }
 
     environment_variable {
-      name  = "WWW_S3_HOSTED_ZONE_ID"
-      value = aws_cloudfront_distribution.www_s3_distribution.hosted_zone_id
+      name  = "WWW_S3_DISTRIBUTION_ID"
+      value = aws_cloudfront_distribution.www_s3_distribution.id
     }
   }
 
