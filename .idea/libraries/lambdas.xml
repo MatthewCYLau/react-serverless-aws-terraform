@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="lambdas">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/deploy/lambdas/deleteTodoById.zip!/" />
+      <root url="jar://$PROJECT_DIR$/deploy/lambdas/createComment.zip!/" />
+      <root url="jar://$PROJECT_DIR$/deploy/lambdas/updateTodoById.zip!/" />
+      <root url="jar://$PROJECT_DIR$/deploy/lambdas/createTodo.zip!/" />
+      <root url="jar://$PROJECT_DIR$/deploy/lambdas/deleteCommentById.zip!/" />
+      <root url="jar://$PROJECT_DIR$/deploy/lambdas/getTodoById.zip!/" />
+      <root url="jar://$PROJECT_DIR$/deploy/lambdas/getComments.zip!/" />
+      <root url="jar://$PROJECT_DIR$/deploy/lambdas/createLike.zip!/" />
+      <root url="jar://$PROJECT_DIR$/deploy/lambdas/sqsProcesser.zip!/" />
+      <root url="jar://$PROJECT_DIR$/deploy/lambdas/deleteLikeById.zip!/" />
+      <root url="jar://$PROJECT_DIR$/deploy/lambdas/getTodos.zip!/" />
+      <root url="jar://$PROJECT_DIR$/deploy/lambdas/getLikes.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

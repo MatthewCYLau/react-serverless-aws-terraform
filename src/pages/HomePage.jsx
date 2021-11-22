@@ -5,6 +5,7 @@ import { Card, Button, Input } from "antd";
 import "antd/dist/antd.css";
 import { Layout, Spin } from "antd";
 import { API, Auth } from "aws-amplify";
+import { Typography, Space } from 'antd';
 
 const { Content } = Layout;
 
@@ -14,6 +15,8 @@ const HomePage = () => {
   const [currnetUsername, setCurrnetUsername] = useState("");
   const initialFormState = { name: "", description: "" };
   const [formState, setFormState] = useState(initialFormState);
+  const { Text, Title, Link } = Typography;
+
 
   useEffect(() => {
     fetchCurrnetUsername();
@@ -110,6 +113,7 @@ const HomePage = () => {
                 title={todo.name.S ? todo.name.S : todo.name}
                 style={{ width: 300 }}
               >
+                <Title level={4}>{todo.username.S}</Title>
                 <p>
                   {todo.description.S ? todo.description.S : todo.description}
                 </p>
