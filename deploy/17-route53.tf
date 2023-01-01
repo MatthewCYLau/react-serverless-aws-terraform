@@ -1,5 +1,5 @@
 resource "aws_route53_record" "root-a" {
-  zone_id = "Z07982832AOOQSSCIJNDL"
+  zone_id = "Z06224111Y8DL67QO3X56"
   name    = var.domain_name
   type    = "A"
 
@@ -11,7 +11,7 @@ resource "aws_route53_record" "root-a" {
 }
 
 resource "aws_route53_record" "www-a" {
-  zone_id = "Z07982832AOOQSSCIJNDL"
+  zone_id = "Z06224111Y8DL67QO3X56"
   name    = "www.${var.domain_name}"
   type    = "A"
 

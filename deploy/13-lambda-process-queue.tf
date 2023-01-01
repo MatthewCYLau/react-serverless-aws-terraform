@@ -11,7 +11,7 @@ resource "aws_lambda_function" "process_queue" {
   filename         = data.archive_file.process_queue_zip.output_path
   source_code_hash = data.archive_file.process_queue_zip.output_base64sha256
   handler          = "sqsProcesser.handler"
-  runtime          = "nodejs10.x"
+  runtime          = "nodejs14.x"
   role             = aws_iam_role.queue_processer_lambda.arn
 
 }

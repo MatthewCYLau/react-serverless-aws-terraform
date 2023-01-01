@@ -4,7 +4,7 @@ github_project_name = "react-serverless-aws-terraform"
 app_name            = "matlau-react-serverless-app"
 environment         = "staging"
 common_tags         = { project = "react-serverless-aws-terraform" }
-domain_name         = "mattlau.co.uk"
-bucket_name         = "mattlau.co.uk"
+domain_name         = "reactserverless.co.uk"
+bucket_name         = "reactserverless.co.uk"
 
 
