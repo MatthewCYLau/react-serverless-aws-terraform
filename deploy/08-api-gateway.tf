@@ -1,13 +1,7 @@
 resource "aws_api_gateway_rest_api" "app" {
   name        = "${var.app_name}-api"
   description = "React Serverless App API"
-  body        = data.template_file.api_definition.rendered
-
-}
-
-data "template_file" "api_definition" {
-  template = file("api/openapi.yaml")
-  vars = {
+  body = templatefile("api/openapi.yaml", {
     lambda_uri_get_todos            = aws_lambda_function.get_todos.invoke_arn
     lambda_uri_create_todo          = aws_lambda_function.create_todo.invoke_arn
     lambda_uri_get_todo_by_id       = aws_lambda_function.get_todo_by_id.invoke_arn
@@ -21,7 +15,7 @@ data "template_file" "api_definition" {
     lambda_uri_delete_like_by_id    = aws_lambda_function.delete_like_by_id.invoke_arn
     apig_invocation_uri             = "arn:aws:apigateway:${var.default_region}:sqs:path/${data.aws_caller_identity.current.account_id}/${aws_sqs_queue.app_queue.name}"
     apig_sqs_send_msg_role          = aws_iam_role.apig_sqs_send_msg.arn
-  }
+  })
 }
 
 resource "aws_api_gateway_deployment" "app" {

@@ -9,6 +9,8 @@ resource "aws_dynamodb_table" "todos" {
     name = "todoId"
     type = "S"
   }
+
+  tags = var.common_tags
 }
 
 resource "aws_dynamodb_table" "comments" {
@@ -33,6 +35,8 @@ resource "aws_dynamodb_table" "comments" {
     hash_key        = "todoId"
     projection_type = "ALL"
   }
+
+  tags = var.common_tags
 }
 
 resource "aws_dynamodb_table" "likes" {
@@ -57,4 +61,6 @@ resource "aws_dynamodb_table" "likes" {
     hash_key        = "commentId"
     projection_type = "ALL"
   }
+
+  tags = var.common_tags
 }
