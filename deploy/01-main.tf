@@ -8,6 +8,13 @@ provider "aws" {
 }
 
 terraform {
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "=5.68"
+    }
+  }
   backend "s3" {
     bucket = "react-serverless-app-tf-state"
     key    = "terraform.tfstate"
