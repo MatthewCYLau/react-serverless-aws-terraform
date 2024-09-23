@@ -3,7 +3,7 @@ import { Layout } from "antd";
 const { Footer } = Layout;
 
 const AppFooter = () => (
-  <Footer style={{ textAlign: "center" }}>Matt Lau ©2024</Footer>
+  <Footer style={{ textAlign: "center" }}>Matthew Lau ©{new Date().getFullYear()}</Footer>
 );
 
 export default AppFooter;
