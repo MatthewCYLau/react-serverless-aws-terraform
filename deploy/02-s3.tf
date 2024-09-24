@@ -1,20 +1,28 @@
 resource "aws_s3_bucket" "www_bucket" {
   bucket        = "www.${var.bucket_name}"
   force_destroy = true
+  tags          = var.common_tags
+}
 
+resource "aws_s3_bucket_website_configuration" "www_bucket" {
+  bucket = aws_s3_bucket.www_bucket.id
+
+  index_document {
+    suffix = "index.html"
+  }
+  error_document {
+    key = "index.html"
+  }
+}
+
+resource "aws_s3_bucket_cors_configuration" "www_bucket" {
+  bucket = aws_s3_bucket.www_bucket.id
   cors_rule {
     allowed_headers = ["Authorization", "Content-Length"]
     allowed_methods = ["GET", "POST"]
     allowed_origins = ["https://www.${var.domain_name}"]
     max_age_seconds = 3000
   }
-
-  website {
-    index_document = "index.html"
-    error_document = "index.html"
-  }
-
-  tags = var.common_tags
 }
 
 resource "aws_s3_bucket_ownership_controls" "www_bucket" {
@@ -68,11 +76,14 @@ POLICY
 # S3 bucket for redirecting non-www to www.
 resource "aws_s3_bucket" "root_bucket" {
   bucket = var.bucket_name
-  website {
-    redirect_all_requests_to = "https://www.${var.domain_name}"
-  }
+  tags   = var.common_tags
+}
 
-  tags = var.common_tags
+resource "aws_s3_bucket_website_configuration" "root_bucket" {
+  bucket = aws_s3_bucket.root_bucket.id
+  redirect_all_requests_to {
+    host_name = "https://www.${var.domain_name}"
+  }
 }
 
 resource "aws_s3_bucket_ownership_controls" "root_bucket" {
