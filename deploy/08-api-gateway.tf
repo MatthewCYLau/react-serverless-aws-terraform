@@ -23,5 +23,10 @@ resource "aws_api_gateway_deployment" "app" {
     aws_api_gateway_rest_api.app
   ]
   rest_api_id = aws_api_gateway_rest_api.app.id
-  stage_name  = var.environment
+}
+
+resource "aws_api_gateway_stage" "this" {
+  deployment_id = aws_api_gateway_deployment.app.id
+  rest_api_id   = aws_api_gateway_rest_api.app.id
+  stage_name    = var.environment
 }
